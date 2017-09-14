@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A4794971F6A8D170015DE47 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4794961F6A8D170015DE47 /* ResultViewController.swift */; };
 		9A5B19811F69222F008BDB1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B19801F69222F008BDB1D /* AppDelegate.swift */; };
 		9A5B19831F69222F008BDB1D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5B19821F69222F008BDB1D /* ViewController.swift */; };
 		9A5B19861F69222F008BDB1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A5B19841F69222F008BDB1D /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A4794961F6A8D170015DE47 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		9A5B197D1F69222F008BDB1D /* AnimalFace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimalFace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A5B19801F69222F008BDB1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A5B19821F69222F008BDB1D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			children = (
 				9A5B19801F69222F008BDB1D /* AppDelegate.swift */,
 				9A5B19821F69222F008BDB1D /* ViewController.swift */,
+				9A4794961F6A8D170015DE47 /* ResultViewController.swift */,
 				9A5B19841F69222F008BDB1D /* Main.storyboard */,
 				9A5B19871F69222F008BDB1D /* Assets.xcassets */,
 				9A5B19891F69222F008BDB1D /* LaunchScreen.storyboard */,
@@ -138,6 +141,7 @@
 			files = (
 				9A5B19831F69222F008BDB1D /* ViewController.swift in Sources */,
 				9A5B19811F69222F008BDB1D /* AppDelegate.swift in Sources */,
+				9A4794971F6A8D170015DE47 /* ResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,11 +281,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7JKB5AMAKP;
 				INFOPLIST_FILE = AnimalFace/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.udonko.AnimalFace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -292,11 +297,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7JKB5AMAKP;
 				INFOPLIST_FILE = AnimalFace/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.udonko.AnimalFace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
