@@ -24,9 +24,9 @@ class ViewController: UIViewController {
 
     func viewGradient(){
         //グラデーションの開始色
-        let topColor = UIColor(red:0.07, green:0.13, blue:0.26, alpha:1)
+        let topColor = UIColor(red:0.88, green:0.96, blue:0.98, alpha:1)
         //グラデーションの開始色
-        let bottomColor = UIColor(red:0.54, green:0.74, blue:0.74, alpha:1)
+        let bottomColor = UIColor(red:0.94, green:1.00, blue:0.95, alpha:1)
 
         //グラデーションの色を配列で管理
         let gradientColors: [CGColor] = [topColor.cgColor, bottomColor.cgColor]
