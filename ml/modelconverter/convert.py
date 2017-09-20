@@ -10,10 +10,10 @@ coreml_model = coremltools.converters.keras.convert(
 	image_scale = 1.0, 
 	predicted_feature_name = "label", 
 	input_names='image',
-	class_labels = ['dog','cat']
+	class_labels = ['coala','inu','kaba','kitsune','kuma','neko','panda','penguin','risu','uma','usagi','ushi']
 )
 
-coreml_model.save('modelt.mlmodel')
+coreml_model.save('model.mlmodel')
 
 
 

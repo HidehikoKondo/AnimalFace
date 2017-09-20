@@ -13,6 +13,9 @@
 		9A5B19861F69222F008BDB1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A5B19841F69222F008BDB1D /* Main.storyboard */; };
 		9A5B19881F69222F008BDB1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A5B19871F69222F008BDB1D /* Assets.xcassets */; };
 		9A5B198B1F69222F008BDB1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A5B19891F69222F008BDB1D /* LaunchScreen.storyboard */; };
+		9AFE1F961F72550A00FAF114 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFE1F951F72550A00FAF114 /* CameraViewController.swift */; };
+		9AFE1F981F72593200FAF114 /* AnimalFaceModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 9AFE1F971F72592C00FAF114 /* AnimalFaceModel.mlmodel */; };
+		9AFE1F9A1F72666800FAF114 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFE1F991F72666800FAF114 /* HelpViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		9A5B19871F69222F008BDB1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A5B198A1F69222F008BDB1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9A5B198C1F69222F008BDB1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9AFE1F951F72550A00FAF114 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		9AFE1F971F72592C00FAF114 /* AnimalFaceModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = AnimalFaceModel.mlmodel; path = ../../../ml/modelconverter/AnimalFaceModel.mlmodel; sourceTree = "<group>"; };
+		9AFE1F991F72666800FAF114 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,13 +62,16 @@
 		9A5B197F1F69222F008BDB1D /* AnimalFace */ = {
 			isa = PBXGroup;
 			children = (
+				9AFE1F971F72592C00FAF114 /* AnimalFaceModel.mlmodel */,
 				9A5B19801F69222F008BDB1D /* AppDelegate.swift */,
 				9A5B19821F69222F008BDB1D /* ViewController.swift */,
 				9A4794961F6A8D170015DE47 /* ResultViewController.swift */,
 				9A5B19841F69222F008BDB1D /* Main.storyboard */,
+				9AFE1F951F72550A00FAF114 /* CameraViewController.swift */,
 				9A5B19871F69222F008BDB1D /* Assets.xcassets */,
 				9A5B19891F69222F008BDB1D /* LaunchScreen.storyboard */,
 				9A5B198C1F69222F008BDB1D /* Info.plist */,
+				9AFE1F991F72666800FAF114 /* HelpViewController.swift */,
 			);
 			path = AnimalFace;
 			sourceTree = "<group>";
@@ -140,6 +149,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A5B19831F69222F008BDB1D /* ViewController.swift in Sources */,
+				9AFE1F9A1F72666800FAF114 /* HelpViewController.swift in Sources */,
+				9AFE1F961F72550A00FAF114 /* CameraViewController.swift in Sources */,
+				9AFE1F981F72593200FAF114 /* AnimalFaceModel.mlmodel in Sources */,
 				9A5B19811F69222F008BDB1D /* AppDelegate.swift in Sources */,
 				9A4794971F6A8D170015DE47 /* ResultViewController.swift in Sources */,
 			);
@@ -281,7 +293,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7JKB5AMAKP;
 				INFOPLIST_FILE = AnimalFace/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.udonko.AnimalFace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -297,7 +309,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7JKB5AMAKP;
 				INFOPLIST_FILE = AnimalFace/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.udonko.AnimalFace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
