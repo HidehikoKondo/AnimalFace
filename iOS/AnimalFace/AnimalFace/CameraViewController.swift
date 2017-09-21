@@ -27,7 +27,36 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewGradient()
+        self.cameraConnection()
+    }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+//        cameraLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+//        cameraLayer.frame = CGRect(x: 0, y: 0, width: cameraView.bounds.width, height: cameraView.bounds.width )
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+
+
+    //カメラキャプチャー
+//    private lazy var captureSession: AVCaptureSession = {
+//        let session = AVCaptureSession()
+//        session.sessionPreset = AVCaptureSession.Preset.photo
+//        guard let backCamera = AVCaptureDevice.default(for: .video),
+//            let input = try? AVCaptureDeviceInput(device: backCamera) else {
+//                return session
+//        }
+//        session.addInput(input)
+//        return session
+//    }()
+//    private lazy var cameraLayer: AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
+
+    func cameraConnection(){
         //セッションの作成
         captureSession = AVCaptureSession()
 
@@ -68,41 +97,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
 
         //セッション開始
         captureSession.startRunning()
-
-        //カメラ表示
-//        cameraView.layer.addSublayer(cameraLayer)
-//        let output = AVCaptureVideoDataOutput()
-//        output.setSampleBufferDelegate(self as? AVCaptureVideoDataOutputSampleBufferDelegate, queue: DispatchQueue(label: "queue"))
-//        captureSession.addOutput(output)
-//        captureSession.startRunning()
-
     }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-//        cameraLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-//        cameraLayer.frame = CGRect(x: 0, y: 0, width: cameraView.bounds.width, height: cameraView.bounds.width )
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
-
-    //カメラキャプチャー
-//    private lazy var captureSession: AVCaptureSession = {
-//        let session = AVCaptureSession()
-//        session.sessionPreset = AVCaptureSession.Preset.photo
-//        guard let backCamera = AVCaptureDevice.default(for: .video),
-//            let input = try? AVCaptureDeviceInput(device: backCamera) else {
-//                return session
-//        }
-//        session.addInput(input)
-//        return session
-//    }()
-//    private lazy var cameraLayer: AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
 
 
     @IBAction func takePhoto(_ sender: Any) {
@@ -112,7 +107,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         //接続から画像を取得
         self.imageOutput.captureStillImageAsynchronously(from: captureVideoConnection!) { (imageDataBuffer, error) -> Void in
             //取得したImageのDataBufferをJPEGを変換
-            let capturedImageData: NSData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataBuffer!) as! NSData
+            let capturedImageData: NSData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataBuffer!)! as NSData
             //JPEGからUIImageを作成
             let Image: UIImage = UIImage(data: capturedImageData as Data)!
             //アルバムに追加
