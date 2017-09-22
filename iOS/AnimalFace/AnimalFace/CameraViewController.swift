@@ -23,6 +23,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     var cameraDevices: AVCaptureDevice!
     var imageOutput: AVCaptureStillImageOutput!
     var imageToAnalyis : CIImage?
+    var inputImage: CIImage!
 
 
     //MARK: - Life cycle
@@ -181,9 +182,67 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             })
             for face in observations
             {
-                //顔を検出したら、分類処理へ。（１回だけでいいので複数検出したらreturn）
+                //TODO: 顔を検出したら、分類処理へ。（１回だけでいいので複数検出したらreturn）
                 print("顔を検出しました")
                 break;
+            }
+        }
+    }
+
+
+    // MARK: -顔分類
+    func faceClassification(){
+        //画像をモデルに渡す形式（CIImage）に変換
+        guard let uiImage = thumbnailView.image
+            else { fatalError("no image from image picker") }
+        guard let ciImage = CIImage(image: uiImage)
+            else { fatalError("can't create CIImage from UIImage") }
+        let orientation = CGImagePropertyOrientation(uiImage.imageOrientation)
+        self.inputImage = ciImage.oriented(forExifOrientation: Int32(orientation.rawValue))
+
+        //読み込んだ画像をそのまま推論処理へ
+        let handler = VNImageRequestHandler(ciImage: self.inputImage)
+        do {
+            try handler.perform([self.classificationRequest_dogorcat])
+        } catch {
+            print(error)
+        }
+    }
+
+
+    lazy var classificationRequest_dogorcat: VNCoreMLRequest = {
+        // Load the ML model through its generated class and create a Vision request for it.
+        do {
+            var model: VNCoreMLModel? = nil
+            model = try! VNCoreMLModel(for: AnimalFaceModel().model)
+            return VNCoreMLRequest(model: model!, completionHandler: self.handleClassification)
+        } catch {
+            fatalError("can't load Vision ML model: \(error)")
+        }
+    }()
+
+
+    func handleClassification(request: VNRequest, error: Error?) {
+        guard let observations = request.results as? [VNClassificationObservation]
+            else { fatalError("unexpected result type from VNCoreMLRequest") }
+        guard let best = observations.first
+            else { fatalError("can't get best result") }
+
+
+        DispatchQueue.main.async {
+            var classification: String = (best.identifier);
+            print("Classification: \"\(classification)\" Confidence: \(best.confidence)")
+
+            if(classification == "corporate"){
+                print("バックオフィスの人ですか？")
+            }else if(classification == "designer"){
+                print("デザイナーさんですか？")
+            }else if(classification == "engeneer"){
+                print("エンジニアですか？")
+            }else if(classification == "officer"){
+                print("もしかして役員ですか？")
+            }else if(classification == "qacs"){
+                print("QA・CSの人ですか？")
             }
         }
     }
