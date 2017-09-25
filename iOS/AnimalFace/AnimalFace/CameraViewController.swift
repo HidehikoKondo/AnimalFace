@@ -197,8 +197,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             else { fatalError("no image from image picker") }
         guard let ciImage = CIImage(image: uiImage)
             else { fatalError("can't create CIImage from UIImage") }
-        let orientation = CGImagePropertyOrientation(uiImage.imageOrientation)
-        self.inputImage = ciImage.oriented(forExifOrientation: Int32(orientation.rawValue))
+        let orientation = CGImagePropertyOrientation(rawValue: UInt32(uiImage.imageOrientation.rawValue))
+        self.inputImage = ciImage.oriented(forExifOrientation: Int32(orientation!.rawValue))
 
         //読み込んだ画像をそのまま推論処理へ
         let handler = VNImageRequestHandler(ciImage: self.inputImage)
