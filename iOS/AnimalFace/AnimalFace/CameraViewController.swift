@@ -184,6 +184,9 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             {
                 //TODO: 顔を検出したら、分類処理へ。（１回だけでいいので複数検出したらreturn）
                 print("顔を検出しました")
+                //分類処理へ
+                self.faceClassification()
+
                 break;
             }
         }
@@ -233,16 +236,32 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             var classification: String = (best.identifier);
             print("Classification: \"\(classification)\" Confidence: \(best.confidence)")
 
-            if(classification == "corporate"){
-                print("バックオフィスの人ですか？")
-            }else if(classification == "designer"){
-                print("デザイナーさんですか？")
-            }else if(classification == "engeneer"){
-                print("エンジニアですか？")
-            }else if(classification == "officer"){
-                print("もしかして役員ですか？")
-            }else if(classification == "qacs"){
-                print("QA・CSの人ですか？")
+            if(classification == "coala"){
+                print("コアラ")
+            }else if(classification == "inu"){
+                print("いぬ")
+            }else if(classification == "kaba"){
+                print("カバ")
+            }else if(classification == "kitsune"){
+                print("キツネ")
+            }else if(classification == "kuma"){
+                print("くま")
+            }else if(classification == "neko"){
+                print("ねこ")
+            }else if(classification == "panda"){
+                print("パンダ")
+            }else if(classification == "penguin"){
+                print("ペンギン")
+            }else if(classification == "risu"){
+                print("リス")
+            }else if(classification == "uma"){
+                print("うま")
+            }else if(classification == "usagi"){
+                print("うさぎ")
+            }else if(classification == "ushi"){
+                print("うし")
+            }else{
+                print("判別きませんでした")
             }
         }
     }
