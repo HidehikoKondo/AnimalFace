@@ -6,5 +6,6 @@ target 'AnimalFace' do
   use_frameworks!
 
   # Pods for AnimalFace
-
+  pod 'Google-Mobile-Ads-SDK'
+  pod 'Firebase/AdMob'
 end
