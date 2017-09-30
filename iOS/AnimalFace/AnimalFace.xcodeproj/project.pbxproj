@@ -81,13 +81,13 @@
 				9AFE1F971F72592C00FAF114 /* AnimalFaceModel.mlmodel */,
 				9A5B19801F69222F008BDB1D /* AppDelegate.swift */,
 				9A5B19821F69222F008BDB1D /* ViewController.swift */,
-				9A4794961F6A8D170015DE47 /* ResultViewController.swift */,
-				9A5B19841F69222F008BDB1D /* Main.storyboard */,
 				9AFE1F951F72550A00FAF114 /* CameraViewController.swift */,
+				9A4794961F6A8D170015DE47 /* ResultViewController.swift */,
+				9AFE1F991F72666800FAF114 /* HelpViewController.swift */,
+				9A5B19841F69222F008BDB1D /* Main.storyboard */,
 				9A5B19871F69222F008BDB1D /* Assets.xcassets */,
 				9A5B19891F69222F008BDB1D /* LaunchScreen.storyboard */,
 				9A5B198C1F69222F008BDB1D /* Info.plist */,
-				9AFE1F991F72666800FAF114 /* HelpViewController.swift */,
 			);
 			path = AnimalFace;
 			sourceTree = "<group>";

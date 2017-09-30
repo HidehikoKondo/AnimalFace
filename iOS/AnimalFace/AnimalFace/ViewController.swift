@@ -9,28 +9,24 @@
 import UIKit
 import GoogleMobileAds
 
-class ViewController: UIViewController, GADBannerViewDelegate  {
+class ViewController: UIViewController, GADBannerViewDelegate{
     @IBOutlet weak var adView: UIView!
     var bannerView: GADBannerView!
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
         self.viewGradient()
-    }
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-
-        //ビュー位置調整
         
-        print("safeview-----------------", self.view.safeAreaInsets)
-        self.adView.frame = CGRect(x: self.adView.frame.origin.x,
-                                   y: self.view.frame.height - self.adView.frame.height -  self.view.safeAreaInsets.bottom,
-                                   width: self.adView.frame.width,
-                                   height: self.adView.frame.height)
+    }
+    
 
-        self.admob()
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        /// self.admob()
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,6 +64,13 @@ class ViewController: UIViewController, GADBannerViewDelegate  {
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
         bannerView.delegate = self
+        
+        //ビュー位置調整
+        print("safeview-----------------", self.view.safeAreaInsets)
+        self.adView.frame = CGRect(x: self.adView.frame.origin.x,
+                                   y: self.view.frame.height - self.adView.frame.height -  self.view.safeAreaInsets.bottom,
+                                   width: self.adView.frame.width,
+                                   height: self.adView.frame.height)
     }
 
     /// Tells the delegate an ad request loaded an ad.
@@ -102,5 +105,6 @@ class ViewController: UIViewController, GADBannerViewDelegate  {
     func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
         print("adViewWillLeaveApplication")
     }
+ 
 }
 

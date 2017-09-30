@@ -67,10 +67,18 @@
                                     <action selector="back:" destination="iTP-h8-vy5" eventType="touchUpInside" id="mhT-Tq-5W2"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OKU-Uk-u1y">
+                                <rect key="frame" x="27" y="762" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.32181913049999999" green="1" blue="0.30034052579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="jrr-18-eFn"/>
                     </view>
+                    <connections>
+                        <outlet property="adView" destination="OKU-Uk-u1y" id="qkP-Hm-pkW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fTr-h0-ysh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -84,17 +92,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jPG-Ws-iqw">
-                                <rect key="frame" x="11" y="602" width="80" height="55"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <state key="normal" title="HELP"/>
-                                <connections>
-                                    <segue destination="iTP-h8-vy5" kind="presentation" id="mGV-qi-wYy"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZu-eU-tab">
-                                <rect key="frame" x="113" y="591" width="147" height="66"/>
+                                <rect key="frame" x="35" y="449" width="147" height="66"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Analyze"/>
@@ -124,11 +123,26 @@
                                     <action selector="takePhoto:" destination="b5F-LQ-feF" eventType="touchUpInside" id="udl-ja-J5M"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C5P-cv-xY3">
+                                <rect key="frame" x="26" y="762" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.32181913049999999" green="1" blue="0.30034052579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jPG-Ws-iqw">
+                                <rect key="frame" x="223" y="455" width="80" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <state key="normal" title="HELP"/>
+                                <connections>
+                                    <segue destination="iTP-h8-vy5" kind="presentation" id="mGV-qi-wYy"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="KUe-fi-3CF"/>
                     </view>
                     <connections>
+                        <outlet property="adView" destination="C5P-cv-xY3" id="unm-J5-QVX"/>
                         <outlet property="cameraView" destination="GnE-hO-dfs" id="F72-Vz-3K5"/>
                         <outlet property="facelineImageView" destination="PFI-ly-SV6" id="U9Q-ha-SHr"/>
                         <outlet property="thumbnailView" destination="Wgj-wU-j1R" id="NWZ-OF-Xm8"/>
@@ -164,10 +178,18 @@
                                     <action selector="back:" destination="EXF-tS-1gx" eventType="touchUpInside" id="6m7-D9-Eux"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pfs-pc-r8c">
+                                <rect key="frame" x="39" y="762" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.32181913049999999" green="1" blue="0.30034052579999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="X8M-AI-7JK"/>
                     </view>
+                    <connections>
+                        <outlet property="adView" destination="Pfs-pc-r8c" id="59o-hq-blX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qD2-Ra-0lU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
