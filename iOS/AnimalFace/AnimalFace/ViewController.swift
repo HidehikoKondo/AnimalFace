@@ -11,22 +11,19 @@ import GoogleMobileAds
 
 class ViewController: UIViewController, GADBannerViewDelegate{
     @IBOutlet weak var adView: UIView!
+    @IBOutlet weak var adLayoutView: UIView!
     var bannerView: GADBannerView!
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
         self.viewGradient()
-        
     }
     
-
-
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        /// self.admob()
+        self.admob()
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,9 +33,9 @@ class ViewController: UIViewController, GADBannerViewDelegate{
 
     func viewGradient(){
         //グラデーションの開始色
-        let topColor = UIColor(red:0.88, green:0.96, blue:0.98, alpha:1)
+        let topColor = UIColor(red:0.76, green:0.94, blue:0.98, alpha:1)
         //グラデーションの開始色
-        let bottomColor = UIColor(red:0.94, green:1.00, blue:0.95, alpha:1)
+        let bottomColor = UIColor(red:0.78, green:0.97, blue:0.81, alpha:1)
 
         //グラデーションの色を配列で管理
         let gradientColors: [CGColor] = [topColor.cgColor, bottomColor.cgColor]
@@ -55,11 +52,21 @@ class ViewController: UIViewController, GADBannerViewDelegate{
         self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
 
+    //MARK: touchイベント
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touch")
+        // secondViewControllerのインスタンス生成.
+        let storyboard: UIStoryboard = self.storyboard!
+        let nextView = storyboard.instantiateViewController(withIdentifier: "cameraviewcontroller") as! CameraViewController
+        self.present(nextView, animated: true, completion: nil)
+    }
+
+    
     //MARK: AdMob
     func admob(){
         //ADビューの配置(320x50)
         bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        self.adView.addSubview(bannerView)
+        self.adLayoutView.addSubview(bannerView)
         bannerView.adUnitID = "ca-app-pub-3324877759270339/5533467015"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
