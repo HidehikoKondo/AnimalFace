@@ -19,6 +19,7 @@ class ViewController: UIViewController, GADBannerViewDelegate{
         // Do any additional setup after loading the view, typically from a nib.
 
         self.viewGradient()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -53,13 +54,13 @@ class ViewController: UIViewController, GADBannerViewDelegate{
     }
 
     //MARK: touchイベント
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touch")
-        // secondViewControllerのインスタンス生成.
-        let storyboard: UIStoryboard = self.storyboard!
-        let nextView = storyboard.instantiateViewController(withIdentifier: "cameraviewcontroller") as! CameraViewController
-        self.present(nextView, animated: true, completion: nil)
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        print("touch")
+//        // secondViewControllerのインスタンス生成.
+//        let storyboard: UIStoryboard = self.storyboard!
+//        let nextView = storyboard.instantiateViewController(withIdentifier: "cameraviewcontroller") as! CameraViewController
+//        self.present(nextView, animated: true, completion: nil)
+//    }
 
     
     //MARK: AdMob
