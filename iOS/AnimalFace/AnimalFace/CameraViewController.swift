@@ -53,6 +53,11 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
 
     //MARK: - カメラ関連
     func cameraConnection(){
+        //シミュレータだったら何もしない
+        if(TARGET_OS_SIMULATOR != 0){
+            return
+        }
+
         //セッションの作成
         captureSession = AVCaptureSession()
 
@@ -100,6 +105,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
 
 
     @IBAction func takePhoto(_ sender: Any) {
+        //シミュレータだったら何もしない
+        if(TARGET_OS_SIMULATOR != 0){
+            return
+        }
         //ビデオ出力に接続
         let captureVideoConnection = imageOutput.connection(with: AVMediaType.video)
         
@@ -223,7 +232,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         guard let best = observations.first
             else { fatalError("can't get best result") }
 
-
         DispatchQueue.main.async {
             var classification: String = (best.identifier);
             print("Classification: \"\(classification)\" Confidence: \(best.confidence)")
@@ -255,6 +263,13 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             }else{
                 print("判別きませんでした")
             }
+
+            // 結果画面へ結果の受け渡しと遷移
+            let storyboard: UIStoryboard = self.storyboard!
+            let nextView = storyboard.instantiateViewController(withIdentifier: "resultviewcontroller") as! ResultViewController
+            nextView.result = classification
+            self.present(nextView, animated: true, completion: nil)
+
         }
     }
 

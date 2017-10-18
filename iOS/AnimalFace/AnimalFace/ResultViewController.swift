@@ -14,13 +14,19 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
     @IBOutlet weak var adView: UIView!
     var bannerView: GADBannerView!
     var interstitial: GADInterstitial!
-
+    //推論結果結果
+    var result: String = ""
     
+    @IBOutlet weak var resultLabel: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         interstitial = createAndLoadInterstitial()
+
+        //結果表示
+        resultLabel.text = result
     }
     
     override func viewDidLayoutSubviews() {
@@ -47,20 +53,16 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
     @IBAction func pushActivityButton(sender: AnyObject) {
         let text = "Share!!"
         let shareImage:UIImage = image.image! as UIImage
-
-
-
-
         // UIActivityViewControllerをインスタンス化
         let activityVc = UIActivityViewController(activityItems: [text, shareImage], applicationActivities: nil)
-
         // UIAcitivityViewControllerを表示
         self.present(activityVc, animated: true, completion: nil)
     }
 
     
     @IBAction func back(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        //self.dismiss(animated: true, completion: nil)
+        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     //MARK: AdMob
