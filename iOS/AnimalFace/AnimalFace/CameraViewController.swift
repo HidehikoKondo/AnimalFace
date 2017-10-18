@@ -26,13 +26,14 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     var imageOutput: AVCaptureStillImageOutput!
     var imageToAnalyis : CIImage?
     var inputImage: CIImage!
+    var cameraType: Bool = true
 
 
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewGradient()
-        self.cameraConnection()
+        self.cameraConnection(type: cameraType)
     }
 
     override func viewWillLayoutSubviews() {
@@ -52,7 +53,18 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
 
     //MARK: - カメラ関連
-    func cameraConnection(){
+    @IBAction func changeCamera(_ sender: Any) {
+        //いったんセッション切る
+        captureSession.stopRunning()
+
+        //カメラタイプを反転
+        cameraType = !cameraType
+
+        //再接続
+        self.cameraConnection(type: cameraType)
+    }
+
+    func cameraConnection(type: Bool){
         //シミュレータだったら何もしない
         if(TARGET_OS_SIMULATOR != 0){
             return
@@ -66,8 +78,14 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
 
         //バックカメラをcameraDevicesに格納
         for device in devices {
-            if device.position == AVCaptureDevice.Position.front {
-                cameraDevices = device as! AVCaptureDevice
+            if(type == true){
+                if device.position == AVCaptureDevice.Position.front {
+                    cameraDevices = device as! AVCaptureDevice
+                }
+            }else{
+                if device.position == AVCaptureDevice.Position.back {
+                    cameraDevices = device as! AVCaptureDevice
+                }
             }
         }
 
@@ -235,34 +253,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         DispatchQueue.main.async {
             var classification: String = (best.identifier);
             print("Classification: \"\(classification)\" Confidence: \(best.confidence)")
-
-            if(classification == "coala"){
-                print("コアラ")
-            }else if(classification == "inu"){
-                print("いぬ")
-            }else if(classification == "kaba"){
-                print("カバ")
-            }else if(classification == "kitsune"){
-                print("キツネ")
-            }else if(classification == "kuma"){
-                print("くま")
-            }else if(classification == "neko"){
-                print("ねこ")
-            }else if(classification == "panda"){
-                print("パンダ")
-            }else if(classification == "penguin"){
-                print("ペンギン")
-            }else if(classification == "risu"){
-                print("リス")
-            }else if(classification == "uma"){
-                print("うま")
-            }else if(classification == "usagi"){
-                print("うさぎ")
-            }else if(classification == "ushi"){
-                print("うし")
-            }else{
-                print("判別きませんでした")
-            }
 
             // 結果画面へ結果の受け渡しと遷移
             let storyboard: UIStoryboard = self.storyboard!
