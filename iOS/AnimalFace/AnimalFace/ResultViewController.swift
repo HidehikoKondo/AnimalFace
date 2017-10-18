@@ -10,23 +10,30 @@ import UIKit
 import GoogleMobileAds
 
 class ResultViewController: UIViewController, GADBannerViewDelegate ,GADInterstitialDelegate {
-    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var resultImage: UIImageView!
     @IBOutlet weak var adView: UIView!
     var bannerView: GADBannerView!
     var interstitial: GADInterstitial!
     //推論結果結果
     var result: String = ""
+    var faceImage: UIImage! = nil
     
     @IBOutlet weak var resultLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        //AdMob
         interstitial = createAndLoadInterstitial()
 
         //結果表示
         resultLabel.text = result
+        
+        //画像合成
+        let image1:UIImage = UIImage.init(named: "frame_usagi")!
+        let image2:UIImage = faceImage
+        let image:UIImage = combineImage(imageA: image1, imageB: image2)
+        resultImage.image = image;
     }
     
     override func viewDidLayoutSubviews() {
@@ -39,20 +46,34 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func combineImage(imageA:UIImage, imageB:UIImage )-> UIImage{
+        //合体画像
+        var combinedImage: UIImage! =  nil
+        
+        //決定
+        let size: CGSize = imageA.size
+        let rect: CGRect = CGRect(x:0 , y:0 , width:size.width , height:size.height )
+        
+        //コンテキスト作成開始
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        
+        imageA.draw(in: rect)
+        imageB.draw(in: CGRect(x:250 , y:70 , width:170 , height:170))
+        
+        //合成
+        combinedImage = UIGraphicsGetImageFromCurrentImageContext();
+        
+        //合成終了
+        UIGraphicsEndImageContext()
+        
+        return combinedImage
     }
-    */
-
+    
+    //MARK: UI
     @IBAction func pushActivityButton(sender: AnyObject) {
         let text = "Share!!"
-        let shareImage:UIImage = image.image! as UIImage
+        let shareImage:UIImage = resultImage.image! as UIImage
         // UIActivityViewControllerをインスタンス化
         let activityVc = UIActivityViewController(activityItems: [text, shareImage], applicationActivities: nil)
         // UIAcitivityViewControllerを表示

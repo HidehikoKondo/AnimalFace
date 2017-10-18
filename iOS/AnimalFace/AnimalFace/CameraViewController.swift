@@ -139,8 +139,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             //アルバムに追加
             //UIImageWriteToSavedPhotosAlbum(Image, self, nil, nil)
 
-            self.thumbnailView.image = Image
-
+            self.thumbnailView.image = Image.cropping(to: CGRect(x:0, y:200, width:720, height:720))
+            //1280 x 720
+            
+            
             //顔認識へ
             self.faceDetect()
         }
@@ -258,6 +260,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             let storyboard: UIStoryboard = self.storyboard!
             let nextView = storyboard.instantiateViewController(withIdentifier: "resultviewcontroller") as! ResultViewController
             nextView.result = classification
+            nextView.faceImage = self.thumbnailView.image
             self.present(nextView, animated: true, completion: nil)
 
         }
@@ -340,5 +343,23 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         print("adViewWillLeaveApplication")
     }
 }
-
+extension UIImage {
+    func cropping(to: CGRect) -> UIImage? {
+        var opaque = false
+        if let cgImage = cgImage {
+            switch cgImage.alphaInfo {
+            case .noneSkipLast, .noneSkipFirst:
+                opaque = true
+            default:
+                break
+            }
+        }
+        
+        UIGraphicsBeginImageContextWithOptions(to.size, opaque, scale)
+        draw(at: CGPoint(x: -to.origin.x, y: -to.origin.y))
+        let result = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return result
+    }
+}
 
