@@ -11,7 +11,7 @@ import GoogleMobileAds
 
 class ViewController: UIViewController, GADBannerViewDelegate{
     @IBOutlet weak var adView: UIView!
-    @IBOutlet weak var adLayoutView: UIView!
+//    @IBOutlet weak var adLayoutView: UIView!
     var bannerView: GADBannerView!
 
     override func viewDidLoad() {
@@ -67,18 +67,18 @@ class ViewController: UIViewController, GADBannerViewDelegate{
     func admob(){
         //ADビューの配置(320x50)
         bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        self.adLayoutView.addSubview(bannerView)
+        self.adView.addSubview(bannerView)
         bannerView.adUnitID = "ca-app-pub-3324877759270339/5533467015"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
         bannerView.delegate = self
         
         //ビュー位置調整
-        print("safeview-----------------", self.view.safeAreaInsets)
-        self.adView.frame = CGRect(x: self.adView.frame.origin.x,
-                                   y: self.view.frame.height - self.adView.frame.height -  self.view.safeAreaInsets.bottom,
-                                   width: self.adView.frame.width,
-                                   height: self.adView.frame.height)
+//        print("safeview-----------------", self.view.safeAreaInsets)
+//        self.adView.frame = CGRect(x: self.adView.frame.origin.x,
+//                                   y: self.view.frame.height - self.adView.frame.height -  self.view.safeAreaInsets.bottom,
+//                                   width: self.adView.frame.width,
+//                                   height: self.adView.frame.height)
     }
 
     /// Tells the delegate an ad request loaded an ad.
