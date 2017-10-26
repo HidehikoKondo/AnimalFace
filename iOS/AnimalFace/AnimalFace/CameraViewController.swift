@@ -139,10 +139,12 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             //アルバムに追加
             //UIImageWriteToSavedPhotosAlbum(Image, self, nil, nil)
 
-            self.thumbnailView.image = Image.cropping(to: CGRect(x:0, y:200, width:720, height:720))
-            //1280 x 720
-            
-            
+            //self.thumbnailView.image = Image.cropping(to: CGRect(x:0, y:200, width:720, height:720))
+
+            print("width: \(Image.size.width)")
+            print("height: \(Image.size.height)")
+            self.thumbnailView.image = Image.cropping(to: CGRect(x:0, y:((Image.size.height * 0.5)-(Image.size.width * 0.5)), width:Image.size.width, height:Image.size.width))
+
             //顔認識へ
             self.faceDetect()
         }
