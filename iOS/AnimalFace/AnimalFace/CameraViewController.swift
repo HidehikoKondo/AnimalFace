@@ -205,6 +205,14 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             })
             for face in observations
             {
+                //四角で囲む
+                let view = self.CreateBoxView(withColor: UIColor.red)
+                view.frame = self.transformRect(fromRect: face.boundingBox,
+                                                toViewRect: self.thumbnailView)
+                //self.thumbnailView.image = self.originalImage.image
+                //顔の部分を四角で囲む
+                self.thumbnailView.addSubview(view)
+
                 //TODO: 顔を検出したら、分類処理へ。（１回だけでいいので複数検出したらreturn）
                 print("顔を検出しました")
                 //分類処理へ
@@ -215,6 +223,27 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
     }
 
+    //四角で囲む
+    func CreateBoxView(withColor : UIColor) -> UIView {
+        let view = UIView()
+        view.layer.borderColor = withColor.cgColor
+        view.layer.borderWidth = 2
+        view.backgroundColor = UIColor.clear
+        return view
+    }
+
+    //Convert Vision Frame to UIKit Frame
+    func transformRect(fromRect: CGRect , toViewRect :UIView) -> CGRect {
+
+        var toRect = CGRect()
+        toRect.size.width = fromRect.size.width * toViewRect.frame.size.width
+        toRect.size.height = fromRect.size.height * toViewRect.frame.size.height
+        toRect.origin.y =  (toViewRect.frame.height) - (toViewRect.frame.height * fromRect.origin.y )
+        toRect.origin.y  = toRect.origin.y -  toRect.size.height
+        toRect.origin.x =  fromRect.origin.x * toViewRect.frame.size.width
+
+        return toRect
+    }
 
     // MARK: -顔分類
     func faceClassification(){
@@ -263,7 +292,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             let nextView = storyboard.instantiateViewController(withIdentifier: "resultviewcontroller") as! ResultViewController
             nextView.result = classification
             nextView.faceImage = self.thumbnailView.image
-            self.present(nextView, animated: true, completion: nil)
+//            self.present(nextView, animated: true, completion: nil)
 
         }
     }
