@@ -18,22 +18,30 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
     var result: String = ""
     var faceImage: UIImage! = nil
     
-    @IBOutlet weak var resultLabel: UILabel!
+    //@IBOutlet weak var resultLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.viewGradient()
+        
         //AdMob
         interstitial = createAndLoadInterstitial()
 
         //結果表示
-        resultLabel.text = result
+        //resultLabel.text = result
         
         //画像合成
-        let image1:UIImage = UIImage.init(named: "frame_usagi")!
+        
+        let image1:UIImage = UIImage.init(named: "result-" + result)!
         let image2:UIImage = faceImage
         let image:UIImage = combineImage(imageA: image1, imageB: image2)
         resultImage.image = image;
+        
+        resultImage.layer.cornerRadius = resultImage.frame.size.width * 0.5
+        resultImage.layer.borderColor = UIColor.white.cgColor
+        resultImage.layer.borderWidth = 5
+
+        resultImage.clipsToBounds = true
     }
     
     override func viewDidLayoutSubviews() {
@@ -59,7 +67,7 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         
         imageA.draw(in: rect)
-        imageB.draw(in: CGRect(x:250 , y:70 , width:170 , height:170))
+        imageB.draw(in: CGRect(x:135 , y:77 , width:100 , height:100))
         
         //合成
         combinedImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -85,6 +93,28 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         //self.dismiss(animated: true, completion: nil)
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
+    
+    func viewGradient(){
+        //グラデーションの開始色
+        let topColor = UIColor(red:0.76, green:0.94, blue:0.98, alpha:1)
+        //グラデーションの開始色
+        let bottomColor = UIColor(red:0.78, green:0.97, blue:0.81, alpha:1)
+        
+        //グラデーションの色を配列で管理
+        let gradientColors: [CGColor] = [topColor.cgColor, bottomColor.cgColor]
+        
+        //グラデーションレイヤーを作成
+        let gradientLayer: CAGradientLayer = CAGradientLayer()
+        
+        //グラデーションの色をレイヤーに割り当てる
+        gradientLayer.colors = gradientColors
+        //グラデーションレイヤーをスクリーンサイズにする
+        gradientLayer.frame = self.view.bounds
+        
+        //グラデーションレイヤーをビューの一番下に配置
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+
     
     //MARK: AdMob
     func admob(){

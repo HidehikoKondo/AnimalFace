@@ -41,7 +41,9 @@
 	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>カメラを利用します</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>診断結果をフォトライブラリに保存します</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>写真を利用します</string>
+	<string>フォトライブラリを利用します</string>
 </dict>
 </plist>

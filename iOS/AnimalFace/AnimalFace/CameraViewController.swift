@@ -292,7 +292,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             let nextView = storyboard.instantiateViewController(withIdentifier: "resultviewcontroller") as! ResultViewController
             nextView.result = classification
             nextView.faceImage = self.thumbnailView.image
-//            self.present(nextView, animated: true, completion: nil)
+            self.present(nextView, animated: true, completion: nil)
 
         }
     }
