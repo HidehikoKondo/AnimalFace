@@ -84,8 +84,31 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         let shareImage:UIImage = resultImage.image! as UIImage
         // UIActivityViewControllerをインスタンス化
         let activityVc = UIActivityViewController(activityItems: [text, shareImage], applicationActivities: nil)
+
+        //アクティビティに表示したくない機能やアプリを指定
+        let excludedActivityTypes = [
+            UIActivityType.postToWeibo,
+            //UIActivityType.message,
+            //UIActivityType.mail,
+            UIActivityType.print,
+            UIActivityType.copyToPasteboard,
+            UIActivityType.assignToContact,
+            //UIActivityType.saveToCameraRoll,
+            UIActivityType.addToReadingList,
+            UIActivityType.postToFlickr,
+            UIActivityType.postToVimeo,
+            UIActivityType.postToTencentWeibo,
+            UIActivityType.airDrop
+        ]
+        activityVc.excludedActivityTypes = excludedActivityTypes
+
+        activityVc.completionWithItemsHandler = { [unowned self] (activityType, success, items, error) -> Void in
+            print("clsoe activityViewController")
+        }
         // UIAcitivityViewControllerを表示
-        self.present(activityVc, animated: true, completion: nil)
+        self.present(activityVc, animated: true, completion: {
+            print("open activityViewController")
+        })
     }
 
     
@@ -93,7 +116,38 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         //self.dismiss(animated: true, completion: nil)
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
-    
+
+    @IBAction func saveToLibrary(_ sender: Any) {
+        print("結果を保存")
+        // その中の UIImage を取得
+        let targetImage = resultImage.image!
+
+        // UIImage の画像をカメラロールに画像を保存
+        UIImageWriteToSavedPhotosAlbum(targetImage, self, #selector(self.showResultOfSaveImage(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+
+    // 保存を試みた結果をダイアログで表示
+    @objc func showResultOfSaveImage(_ image: UIImage, didFinishSavingWithError error: NSError!, contextInfo: UnsafeMutableRawPointer) {
+        var title = "カメラロールに保存しました"
+        var message = "SNSのアイコンにして、診断結果をみんなにシェアしよう！(≧∀≦*)"
+
+        if error != nil {
+            title = "エラーだよ><"
+            message = "診断結果の保存に失敗しました"
+        }
+
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        // OKボタンを追加
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler:{
+            (action:UIAlertAction!) -> Void in
+            print("OK")
+        }))
+
+        // UIAlertController を表示
+        self.present(alert, animated: true, completion: nil)
+    }
+
     func viewGradient(){
         //グラデーションの開始色
         let topColor = UIColor(red:0.76, green:0.94, blue:0.98, alpha:1)

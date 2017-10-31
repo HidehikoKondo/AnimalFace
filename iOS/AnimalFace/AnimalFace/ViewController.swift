@@ -19,7 +19,6 @@ class ViewController: UIViewController, GADBannerViewDelegate{
         // Do any additional setup after loading the view, typically from a nib.
 
         self.viewGradient()
-        
     }
     
     override func viewDidLayoutSubviews() {
