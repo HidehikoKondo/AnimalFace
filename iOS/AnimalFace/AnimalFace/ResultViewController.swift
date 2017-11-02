@@ -12,6 +12,14 @@ import GoogleMobileAds
 class ResultViewController: UIViewController, GADBannerViewDelegate ,GADInterstitialDelegate {
     @IBOutlet weak var resultImage: UIImageView!
     @IBOutlet weak var adView: UIView!
+
+
+    @IBOutlet weak var buttonInstagram: UIButton!
+    @IBOutlet weak var buttonTwitter: UIButton!
+    @IBOutlet weak var buttonLine: UIButton!
+
+    var controller: UIDocumentInteractionController!
+
     var bannerView: GADBannerView!
     var interstitial: GADInterstitial!
     //推論結果結果
@@ -23,7 +31,15 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewGradient()
-        
+
+        //デバッグ用
+        if(result == ""){
+            result = "inu"
+        }
+        if(faceImage == nil){
+            faceImage = resultImage.image
+        }
+
         //AdMob
         interstitial = createAndLoadInterstitial()
 
@@ -31,7 +47,7 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         //resultLabel.text = result
         
         //画像合成
-        
+
         let image1:UIImage = UIImage.init(named: "result-" + result)!
         let image2:UIImage = faceImage
         let image:UIImage = combineImage(imageA: image1, imageB: image2)
@@ -42,6 +58,10 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         resultImage.layer.borderWidth = 5
 
         resultImage.clipsToBounds = true
+
+        //アプリの存在確認
+        self.installCheck()
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -78,9 +98,48 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         return combinedImage
     }
     
+    //MARK: 投稿関連
+    func installCheck(){
+
+        if !UIApplication.shared.canOpenURL(NSURL.init(string: "instagram://app")! as URL) {
+            self.buttonInstagram.isEnabled = false
+        }else{
+            print("instagram exsist")
+        }
+
+        if !UIApplication.shared.canOpenURL(NSURL.init(string: "line://")! as URL) {
+            self.buttonLine.isEnabled = false
+            print("line exsist")
+        }
+
+//        if !UIApplication.shared.canOpenURL(NSURL.init(string: "fb://")! as URL) {
+//            self.buttonInstagram.isEnabled = false
+//            print("facebook exsist")
+//        }
+
+        if !UIApplication.shared.canOpenURL(NSURL.init(string: "twitter://")! as URL) {
+            self.buttonTwitter.isEnabled = false
+            print("twitter exsist")
+        }
+
+    }
+
+    @IBAction func shareInstagram(_ sender: Any) {
+        print("share instagram")
+    }
+
+    @IBAction func shareTitter(_ sender: Any) {
+        print("share twitter")
+    }
+
+    @IBAction func shareLINE(_ sender: Any) {
+        print("share line")
+    }
+
+
     //MARK: UI
     @IBAction func pushActivityButton(sender: AnyObject) {
-        let text = "Share!!"
+        let text = "http://www.udonko.net/ \n#どうぶつ顔診断"
         let shareImage:UIImage = resultImage.image! as UIImage
         // UIActivityViewControllerをインスタンス化
         let activityVc = UIActivityViewController(activityItems: [text, shareImage], applicationActivities: nil)
@@ -102,13 +161,58 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         ]
         activityVc.excludedActivityTypes = excludedActivityTypes
 
+        // UIActivityViewControllerを閉じた
         activityVc.completionWithItemsHandler = { [unowned self] (activityType, success, items, error) -> Void in
             print("clsoe activityViewController")
         }
+        //FB、TWのときはこっちを使う
         // UIAcitivityViewControllerを表示
         self.present(activityVc, animated: true, completion: {
             print("open activityViewController")
         })
+
+
+//        var documentInteractionController = UIDocumentInteractionController()
+//
+//        let imageData = UIImageJPEGRepresentation(self.resultImage.image!, 0.9)
+//        let fileURL = NSURL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent("Documents/image.igo")
+//        try!imageData?.write(to: fileURL!)
+//
+//        documentInteractionController = UIDocumentInteractionController(url: fileURL!)
+//
+//        // TwitterとFacebookと一緒にアクティビティに表示させたいのでUTIに"com.instagram.shareextension"を指定する
+//        documentInteractionController.uti = "com.instagram.exclusivegram"
+//
+//        if UIApplication.shared.canOpenURL(NSURL.init(string: "instagram://app")! as URL) {
+//            documentInteractionController.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
+//        } else {
+//            print("Could not find Instagram app.")
+        //        }// Instagram用の投稿画像を作成
+        let image = self.resultImage.image
+        let imageData = UIImageJPEGRepresentation(image!, 0.9)
+
+        // ファイルのURLを UIDocumentInteractionController に渡す必要があるので、適当な場所に一旦保存する
+        // 拡張子は .igo を指定
+        let fileURL = NSURL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent("Documents/image.igo")
+        try!imageData?.write(to: fileURL!)
+
+        // UIDocumentInteractionController を準備する
+        self.controller = UIDocumentInteractionController(url: fileURL!)
+
+        // 写真の共有先を Instagram のみにするために UTI を"com.instagram.exclusivegram" にする
+        self.controller.uti = "com.instagram.exclusivegram"
+
+        // キャプション(コメント)を追加する機能は現在使えない!!!
+        // http://developers.instagram.com/post/125972775561/removing-pre-filled-captions-from-mobile-sharing
+        // self.controller.annotation = ["InstagramCaption": "My message"]
+
+        // メニューを表示する（インスタのときだけコレ）
+        if UIApplication.shared.canOpenURL(NSURL.init(string: "instagram://app")! as URL) {
+            self.controller.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
+
+        } else {
+            print("instagram がインストールされてません!")
+        }
     }
 
     
