@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMobileAds
 
+
 class ResultViewController: UIViewController, GADBannerViewDelegate ,GADInterstitialDelegate {
     @IBOutlet weak var resultImage: UIImageView!
     @IBOutlet weak var adView: UIView!
@@ -62,6 +63,7 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         //アプリの存在確認
         self.installCheck()
 
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -100,40 +102,44 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
     
     //MARK: 投稿関連
     func installCheck(){
-
         if !UIApplication.shared.canOpenURL(NSURL.init(string: "instagram://app")! as URL) {
-            self.buttonInstagram.isEnabled = false
-        }else{
-            print("instagram exsist")
+            //self.buttonInstagram.isEnabled = false
+            print("----INSTALL CHECK ---- instagram not exsist")
         }
-
         if !UIApplication.shared.canOpenURL(NSURL.init(string: "line://")! as URL) {
-            self.buttonLine.isEnabled = false
-            print("line exsist")
+            //self.buttonLine.isEnabled = false
+            print("----INSTALL CHECK ---- LINE not exsist")
         }
-
-//        if !UIApplication.shared.canOpenURL(NSURL.init(string: "fb://")! as URL) {
-//            self.buttonInstagram.isEnabled = false
-//            print("facebook exsist")
-//        }
-
         if !UIApplication.shared.canOpenURL(NSURL.init(string: "twitter://")! as URL) {
-            self.buttonTwitter.isEnabled = false
-            print("twitter exsist")
+            //self.buttonTwitter.isEnabled = false
+            print("----INSTALL CHECK ---- twitter not exsist")
         }
-
     }
 
     @IBAction func shareInstagram(_ sender: Any) {
         print("share instagram")
+        alert(title: "(´；Д；｀)", message: "Instagramをインストールしてね")
     }
 
     @IBAction func shareTitter(_ sender: Any) {
         print("share twitter")
+        alert(title: "(´；Д；｀)", message: "Twitterをインストールしてね")
     }
 
     @IBAction func shareLINE(_ sender: Any) {
         print("share line")
+
+        let pasteBoard = UIPasteboard.general
+        pasteBoard.image = self.resultImage.image
+        let lineSchemeImage: String = "line://msg/image/%@"
+        let scheme = String(format: lineSchemeImage, pasteBoard.name as CVarArg)
+        let messageURL: URL! = URL(string: scheme)
+
+        if UIApplication.shared.canOpenURL(messageURL) {
+            UIApplication.shared.open(messageURL, options: [:], completionHandler: nil)
+        } else {
+            alert(title: "(´；Д；｀)", message: "LINEをインストールしてね")
+        }
     }
 
 
@@ -215,7 +221,21 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         }
     }
 
-    
+
+    func alert(title: String, message:String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        // OKボタンを追加
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler:{
+            (action:UIAlertAction!) -> Void in
+            print("OK")
+        }))
+
+        // UIAlertController を表示
+        self.present(alert, animated: true, completion: nil)
+    }
+
+
     @IBAction func back(_ sender: Any) {
         //self.dismiss(animated: true, completion: nil)
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
