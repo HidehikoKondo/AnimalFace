@@ -117,8 +117,32 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
     }
 
     @IBAction func shareInstagram(_ sender: Any) {
-        print("share instagram")
-        alert(title: "(´；Д；｀)", message: "Instagramをインストールしてね")
+        if !UIApplication.shared.canOpenURL(NSURL.init(string: "instagram://app")! as URL) {
+            alert(title: "(´；Д；｀)", message: "Instagramをインストールしてね")
+            return;
+        }
+
+        // Instagram用の投稿画像を作成
+        let image = self.resultImage.image
+        let imageData = UIImageJPEGRepresentation(image!, 0.9)
+
+        // ファイルのURLを UIDocumentInteractionController に渡す必要があるので、適当な場所に一旦保存する
+        // 拡張子は .igo を指定
+        let fileURL = NSURL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent("Documents/image.igo")
+        try!imageData?.write(to: fileURL!)
+
+        // UIDocumentInteractionController を準備する
+        self.controller = UIDocumentInteractionController(url: fileURL!)
+
+        // 写真の共有先を Instagram のみにするために UTI を"com.instagram.exclusivegram" にする
+        self.controller.uti = "com.instagram.exclusivegram"
+
+        // メニューを表示する
+        if UIApplication.shared.canOpenURL(NSURL.init(string: "instagram://app")! as URL) {
+            self.controller.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
+        } else {
+            print("instagram がインストールされてません!")
+        }
     }
 
     @IBAction func shareTitter(_ sender: Any) {
@@ -171,54 +195,10 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         activityVc.completionWithItemsHandler = { [unowned self] (activityType, success, items, error) -> Void in
             print("clsoe activityViewController")
         }
-        //FB、TWのときはこっちを使う
         // UIAcitivityViewControllerを表示
         self.present(activityVc, animated: true, completion: {
             print("open activityViewController")
         })
-
-
-//        var documentInteractionController = UIDocumentInteractionController()
-//
-//        let imageData = UIImageJPEGRepresentation(self.resultImage.image!, 0.9)
-//        let fileURL = NSURL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent("Documents/image.igo")
-//        try!imageData?.write(to: fileURL!)
-//
-//        documentInteractionController = UIDocumentInteractionController(url: fileURL!)
-//
-//        // TwitterとFacebookと一緒にアクティビティに表示させたいのでUTIに"com.instagram.shareextension"を指定する
-//        documentInteractionController.uti = "com.instagram.exclusivegram"
-//
-//        if UIApplication.shared.canOpenURL(NSURL.init(string: "instagram://app")! as URL) {
-//            documentInteractionController.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
-//        } else {
-//            print("Could not find Instagram app.")
-        //        }// Instagram用の投稿画像を作成
-        let image = self.resultImage.image
-        let imageData = UIImageJPEGRepresentation(image!, 0.9)
-
-        // ファイルのURLを UIDocumentInteractionController に渡す必要があるので、適当な場所に一旦保存する
-        // 拡張子は .igo を指定
-        let fileURL = NSURL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent("Documents/image.igo")
-        try!imageData?.write(to: fileURL!)
-
-        // UIDocumentInteractionController を準備する
-        self.controller = UIDocumentInteractionController(url: fileURL!)
-
-        // 写真の共有先を Instagram のみにするために UTI を"com.instagram.exclusivegram" にする
-        self.controller.uti = "com.instagram.exclusivegram"
-
-        // キャプション(コメント)を追加する機能は現在使えない!!!
-        // http://developers.instagram.com/post/125972775561/removing-pre-filled-captions-from-mobile-sharing
-        // self.controller.annotation = ["InstagramCaption": "My message"]
-
-        // メニューを表示する（インスタのときだけコレ）
-        if UIApplication.shared.canOpenURL(NSURL.init(string: "instagram://app")! as URL) {
-            self.controller.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
-
-        } else {
-            print("instagram がインストールされてません!")
-        }
     }
 
 
