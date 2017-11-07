@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMobileAds
+import TwitterKit
 
 class ResultViewController: UIViewController, GADBannerViewDelegate ,GADInterstitialDelegate, UIDocumentInteractionControllerDelegate {
     @IBOutlet weak var resultImage: UIImageView!
@@ -145,8 +146,22 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
     //Twitter投稿
     @IBAction func shareTitter(_ sender: Any) {
         print("share twitter")
-        self.showInterstitial()
-        alert(title: "ｱﾚﾚ?>(○´∀｀○)", message: "Twitterをインストールしてね")
+
+//        Twitter.sharedInstance().logIn(completion: { (session, error) in
+//            if let sess = session {
+//                print("signed in as \(sess.userName)");
+//            } else {
+//                print("error: \(error?.localizedDescription)");
+//            }
+//        })
+
+        let composer = TWTRComposer()
+        composer.setText("just setting up my Twitter Kit")
+        composer.setImage(UIImage(named: "camera"))
+        composer.show(from: self, completion: { result in
+            print("show")
+            self.alert(title: "(´▽｀)ｱﾘｶﾞﾄ!", message: "シェアしてくれてありがとう！")
+        })
     }
 
     //LINE投稿

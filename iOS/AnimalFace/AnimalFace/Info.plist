@@ -45,10 +45,20 @@
 	<string>診断結果をフォトライブラリに保存します</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>フォトライブラリを利用します</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>twitterkit-Ozg2sgGNY13pHm87uu2OnWYBI</string>
+			</array>
+		</dict>
+	</array>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>instagram</string>
 		<string>twitter</string>
+		<string>twitterauth</string>
+		<string>instagram</string>
 		<string>line</string>
 		<string>fb</string>
 	</array>
