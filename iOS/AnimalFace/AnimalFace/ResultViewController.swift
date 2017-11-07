@@ -139,7 +139,7 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
 
     //UIDocumenteInterectionControllerを閉じたらインタースティシャル広告表示
     func documentInteractionControllerDidDismissOpenInMenu(_ controller: UIDocumentInteractionController) {
-        self.showInterstitial()
+        alert(title: "(´▽｀)ｱﾘｶﾞﾄ!", message: "シェアしてくれてありがとう！")
     }
 
     //Twitter投稿
@@ -152,7 +152,7 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
     //LINE投稿
     @IBAction func shareLINE(_ sender: Any) {
         //広告
-        self.showInterstitial()
+        alert(title: "(´▽｀)ｱﾘｶﾞﾄ!", message: "シェアしてくれてありがとう！")
 
         //投稿設定
         let pasteBoard = UIPasteboard.general
@@ -195,7 +195,7 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         activityVc.excludedActivityTypes = excludedActivityTypes
         activityVc.completionWithItemsHandler = { [unowned self] (activityType, success, items, error) -> Void in
             // UIActivityViewControllerを閉じたらインタースティシャル広告表示
-            self.showInterstitial()
+            self.alert(title: "(´▽｀)ｱﾘｶﾞﾄ!", message: "シェアしてくれてありがとう！")
         }
         // UIAcitivityViewControllerを表示
         self.present(activityVc, animated: true, completion: {
