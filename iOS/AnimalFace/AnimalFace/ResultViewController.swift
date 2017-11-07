@@ -9,25 +9,20 @@
 import UIKit
 import GoogleMobileAds
 
-
-class ResultViewController: UIViewController, GADBannerViewDelegate ,GADInterstitialDelegate {
+class ResultViewController: UIViewController, GADBannerViewDelegate ,GADInterstitialDelegate, UIDocumentInteractionControllerDelegate {
     @IBOutlet weak var resultImage: UIImageView!
     @IBOutlet weak var adView: UIView!
-
-
     @IBOutlet weak var buttonInstagram: UIButton!
     @IBOutlet weak var buttonTwitter: UIButton!
     @IBOutlet weak var buttonLine: UIButton!
 
     var controller: UIDocumentInteractionController!
-
     var bannerView: GADBannerView!
     var interstitial: GADInterstitial!
+
     //推論結果結果
     var result: String = ""
     var faceImage: UIImage! = nil
-    
-    //@IBOutlet weak var resultLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,62 +36,58 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
             faceImage = resultImage.image
         }
 
-        //AdMob
-        interstitial = createAndLoadInterstitial()
-
-        //結果表示
-        //resultLabel.text = result
-        
         //画像合成
-
-        let image1:UIImage = UIImage.init(named: "result-" + result)!
-        let image2:UIImage = faceImage
-        let image:UIImage = combineImage(imageA: image1, imageB: image2)
-        resultImage.image = image;
-        
-        resultImage.layer.cornerRadius = resultImage.frame.size.width * 0.5
-        resultImage.layer.borderColor = UIColor.white.cgColor
-        resultImage.layer.borderWidth = 5
-
-        resultImage.clipsToBounds = true
+        self.createResultImage()
 
         //アプリの存在確認
         self.installCheck()
+    }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
 
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.admob()
+        //AdMob
+        interstitial = createAndLoadInterstitial()
+        self.admobBanner()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
+
+    //MARK: 結果画像関連
+    func createResultImage(){
+        let image1:UIImage = UIImage.init(named: "result-" + result)!
+        let image2:UIImage = faceImage
+        let image:UIImage = combineImage(imageA: image1, imageB: image2)
+        resultImage.image = image;
+        resultImage.layer.cornerRadius = resultImage.frame.size.width * 0.5
+        resultImage.layer.borderColor = UIColor.white.cgColor
+        resultImage.layer.borderWidth = 5
+        resultImage.clipsToBounds = true
+    }
+
+    //合体画像
     func combineImage(imageA:UIImage, imageB:UIImage )-> UIImage{
-        //合体画像
         var combinedImage: UIImage! =  nil
-        
-        //決定
         let size: CGSize = imageA.size
         let rect: CGRect = CGRect(x:0 , y:0 , width:size.width , height:size.height )
         
         //コンテキスト作成開始
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
-        
         imageA.draw(in: rect)
         imageB.draw(in: CGRect(x:135 , y:77 , width:100 , height:100))
-        
+
         //合成
         combinedImage = UIGraphicsGetImageFromCurrentImageContext();
-        
+
         //合成終了
         UIGraphicsEndImageContext()
-        
         return combinedImage
     }
     
@@ -116,9 +107,10 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         }
     }
 
+    //Instagram投稿
     @IBAction func shareInstagram(_ sender: Any) {
         if !UIApplication.shared.canOpenURL(NSURL.init(string: "instagram://app")! as URL) {
-            alert(title: "(´；Д；｀)", message: "Instagramをインストールしてね")
+            alert(title: "ｱﾚﾚ?>(○´∀｀○)", message: "Instagramをインストールしてね")
             return;
         }
 
@@ -127,54 +119,65 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         let imageData = UIImageJPEGRepresentation(image!, 0.9)
 
         // ファイルのURLを UIDocumentInteractionController に渡す必要があるので、適当な場所に一旦保存する
-        // 拡張子は .igo を指定
         let fileURL = NSURL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent("Documents/image.igo")
         try!imageData?.write(to: fileURL!)
 
         // UIDocumentInteractionController を準備する
         self.controller = UIDocumentInteractionController(url: fileURL!)
 
-        // 写真の共有先を Instagram のみにするために UTI を"com.instagram.exclusivegram" にする
+        // 写真の共有先設定
         self.controller.uti = "com.instagram.exclusivegram"
+        controller.delegate = self
 
         // メニューを表示する
         if UIApplication.shared.canOpenURL(NSURL.init(string: "instagram://app")! as URL) {
             self.controller.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
         } else {
-            print("instagram がインストールされてません!")
+            alert(title: "ｱﾚﾚ?>(○´∀｀○)", message: "Instagramをインストールしてね")
         }
     }
 
-    @IBAction func shareTitter(_ sender: Any) {
-        print("share twitter")
-        alert(title: "(´；Д；｀)", message: "Twitterをインストールしてね")
+    //UIDocumenteInterectionControllerを閉じたらインタースティシャル広告表示
+    func documentInteractionControllerDidDismissOpenInMenu(_ controller: UIDocumentInteractionController) {
+        self.showInterstitial()
     }
 
-    @IBAction func shareLINE(_ sender: Any) {
-        print("share line")
+    //Twitter投稿
+    @IBAction func shareTitter(_ sender: Any) {
+        print("share twitter")
+        self.showInterstitial()
+        alert(title: "ｱﾚﾚ?>(○´∀｀○)", message: "Twitterをインストールしてね")
+    }
 
+    //LINE投稿
+    @IBAction func shareLINE(_ sender: Any) {
+        //広告
+        self.showInterstitial()
+
+        //投稿設定
         let pasteBoard = UIPasteboard.general
         pasteBoard.image = self.resultImage.image
         let lineSchemeImage: String = "line://msg/image/%@"
         let scheme = String(format: lineSchemeImage, pasteBoard.name as CVarArg)
         let messageURL: URL! = URL(string: scheme)
 
+        //LINE起動
         if UIApplication.shared.canOpenURL(messageURL) {
             UIApplication.shared.open(messageURL, options: [:], completionHandler: nil)
         } else {
-            alert(title: "(´；Д；｀)", message: "LINEをインストールしてね")
+            alert(title: "ｱﾚﾚ?>(○´∀｀○) ", message: "LINEをインストールしてね")
         }
     }
 
 
     //MARK: UI
+    //その他のシェアボタン
     @IBAction func pushActivityButton(sender: AnyObject) {
         let text = "http://www.udonko.net/ \n#どうぶつ顔診断"
         let shareImage:UIImage = resultImage.image! as UIImage
-        // UIActivityViewControllerをインスタンス化
-        let activityVc = UIActivityViewController(activityItems: [text, shareImage], applicationActivities: nil)
 
-        //アクティビティに表示したくない機能やアプリを指定
+        //ActivityViewController設定
+        let activityVc = UIActivityViewController(activityItems: [text, shareImage], applicationActivities: nil)
         let excludedActivityTypes = [
             UIActivityType.postToWeibo,
             //UIActivityType.message,
@@ -182,7 +185,7 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
             UIActivityType.print,
             UIActivityType.copyToPasteboard,
             UIActivityType.assignToContact,
-            //UIActivityType.saveToCameraRoll,
+            UIActivityType.saveToCameraRoll,
             UIActivityType.addToReadingList,
             UIActivityType.postToFlickr,
             UIActivityType.postToVimeo,
@@ -190,10 +193,9 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
             UIActivityType.airDrop
         ]
         activityVc.excludedActivityTypes = excludedActivityTypes
-
-        // UIActivityViewControllerを閉じた
         activityVc.completionWithItemsHandler = { [unowned self] (activityType, success, items, error) -> Void in
-            print("clsoe activityViewController")
+            // UIActivityViewControllerを閉じたらインタースティシャル広告表示
+            self.showInterstitial()
         }
         // UIAcitivityViewControllerを表示
         self.present(activityVc, animated: true, completion: {
@@ -201,28 +203,26 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         })
     }
 
-
+    //アラート
     func alert(title: String, message:String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
         // OKボタンを追加
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler:{
-            (action:UIAlertAction!) -> Void in
-            print("OK")
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler:{(action:UIAlertAction!) -> Void in
+            self.showInterstitial()
         }))
 
         // UIAlertController を表示
         self.present(alert, animated: true, completion: nil)
     }
 
-
+    //戻る
     @IBAction func back(_ sender: Any) {
-        //self.dismiss(animated: true, completion: nil)
-        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
+    //保存ボタン
     @IBAction func saveToLibrary(_ sender: Any) {
-        print("結果を保存")
         // その中の UIImage を取得
         let targetImage = resultImage.image!
 
@@ -236,20 +236,11 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         var message = "SNSのアイコンにして、診断結果をみんなにシェアしよう！(≧∀≦*)"
 
         if error != nil {
-            title = "エラーだよ><"
+            title = "ｱﾚﾚ?>(○´∀｀○) "
             message = "診断結果の保存に失敗しました"
         }
 
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-
-        // OKボタンを追加
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler:{
-            (action:UIAlertAction!) -> Void in
-            print("OK")
-        }))
-
-        // UIAlertController を表示
-        self.present(alert, animated: true, completion: nil)
+        alert(title: title, message: message)
     }
 
     func viewGradient(){
@@ -274,8 +265,8 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
     }
 
     
-    //MARK: AdMob
-    func admob(){
+    //MARK: AdMob banner
+    func admobBanner(){
         //ADビューの配置(320x50)
         bannerView = GADBannerView(adSize: kGADAdSizeBanner)
         self.adView.addSubview(bannerView)
@@ -283,13 +274,6 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
         bannerView.delegate = self
-        
-        //ビュー位置調整
-        print("safeview-----------------", self.view.safeAreaInsets)
-        self.adView.frame = CGRect(x: self.adView.frame.origin.x,
-                                   y: self.view.frame.height - self.adView.frame.height -  self.view.safeAreaInsets.bottom,
-                                   width: self.adView.frame.width,
-                                   height: self.adView.frame.height)
     }
     
     /// Tells the delegate an ad request loaded an ad.
@@ -298,8 +282,7 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
     }
     
     /// Tells the delegate an ad request failed.
-    func adView(_ bannerView: GADBannerView,
-                didFailToReceiveAdWithError error: GADRequestError) {
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
         print("adView:didFailToReceiveAdWithError: \(error.localizedDescription)")
     }
     
@@ -324,7 +307,9 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
     func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
         print("adViewWillLeaveApplication")
     }
-    
+
+
+    //MARK: AdMob interstitial
     //インタースティシャル（ロードが終わったらこれを呼び出す）
     func showInterstitial(){
         if interstitial.isReady {
@@ -333,7 +318,8 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
             print("Ad wasn't ready")
         }
     }
-    
+
+    //インタースティシャルロード
     func createAndLoadInterstitial() -> GADInterstitial {
         var interstitial = GADInterstitial(adUnitID: "ca-app-pub-3324877759270339/9498075835")
         interstitial.delegate = self
@@ -344,12 +330,7 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
         interstitial = createAndLoadInterstitial()
     }
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-    }
 
-    
     /// Tells the delegate an ad request succeeded.
     func interstitialDidReceiveAd(_ ad: GADInterstitial) {
         print("interstitialDidReceiveAd")
@@ -369,11 +350,6 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
     func interstitialWillDismissScreen(_ ad: GADInterstitial) {
         print("interstitialWillDismissScreen")
     }
-    
-    //    /// Tells the delegate the interstitial had been animated off the screen.
-    //    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-    //        print("interstitialDidDismissScreen")
-    //    }
     
     /// Tells the delegate that a user click will open another app
     /// (such as the App Store), backgrounding the current app.

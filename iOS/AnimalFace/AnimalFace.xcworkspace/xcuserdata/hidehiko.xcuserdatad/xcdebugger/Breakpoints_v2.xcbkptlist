@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AnimalFace/CameraViewController.swift"
-            timestampString = "531652328.842464"
+            timestampString = "531729505.913388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "148"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AnimalFace/CameraViewController.swift"
-            timestampString = "531652328.842532"
+            timestampString = "531729505.91346"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "217"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AnimalFace/ResultViewController.swift"
-            timestampString = "531652328.842585"
+            timestampString = "531729505.913531"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "201"
@@ -54,11 +54,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AnimalFace/ResultViewController.swift"
-            timestampString = "531652328.843"
+            timestampString = "531729505.913616"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "207"
@@ -67,34 +67,34 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "AnimalFace.ResultViewController.alert(title: Swift.String, message: Swift.String) -&gt; ()"
                   moduleName = "AnimalFace"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/hidehiko/Documents/Bitbucket/UDONKONET/DEV/AnimalFace/iOS/AnimalFace/AnimalFace/ResultViewController.swift"
-                  timestampString = "531640065.701667"
+                  timestampString = "531658654.722785"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "244"
-                  endingLineNumber = "244"
-                  offsetFromSymbolStart = "160">
+                  startingLineNumber = "210"
+                  endingLineNumber = "210"
+                  offsetFromSymbolStart = "219">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 (Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UIAlertAction&gt;) -&gt; () in AnimalFace.ResultViewController.alert(title: Swift.String, message: Swift.String) -&gt; ()"
                   moduleName = "AnimalFace"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/hidehiko/Documents/Bitbucket/UDONKONET/DEV/AnimalFace/iOS/AnimalFace/AnimalFace/ResultViewController.swift"
-                  timestampString = "531640065.703282"
+                  timestampString = "531658654.725293"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "246"
-                  endingLineNumber = "246"
-                  offsetFromSymbolStart = "16">
+                  startingLineNumber = "212"
+                  endingLineNumber = "212"
+                  offsetFromSymbolStart = "12">
                </Location>
             </Locations>
          </BreakpointContent>
