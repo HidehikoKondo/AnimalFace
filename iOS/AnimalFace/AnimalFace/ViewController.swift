@@ -11,7 +11,6 @@ import GoogleMobileAds
 
 class ViewController: UIViewController, GADBannerViewDelegate{
     @IBOutlet weak var adView: UIView!
-//    @IBOutlet weak var adLayoutView: UIView!
     var bannerView: GADBannerView!
 
     override func viewDidLoad() {
@@ -52,16 +51,6 @@ class ViewController: UIViewController, GADBannerViewDelegate{
         self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
 
-    //MARK: touchイベント
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        print("touch")
-//        // secondViewControllerのインスタンス生成.
-//        let storyboard: UIStoryboard = self.storyboard!
-//        let nextView = storyboard.instantiateViewController(withIdentifier: "cameraviewcontroller") as! CameraViewController
-//        self.present(nextView, animated: true, completion: nil)
-//    }
-
-    
     //MARK: AdMob
     func admob(){
         //ADビューの配置(320x50)
@@ -71,13 +60,6 @@ class ViewController: UIViewController, GADBannerViewDelegate{
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
         bannerView.delegate = self
-        
-        //ビュー位置調整
-//        print("safeview-----------------", self.view.safeAreaInsets)
-//        self.adView.frame = CGRect(x: self.adView.frame.origin.x,
-//                                   y: self.view.frame.height - self.adView.frame.height -  self.view.safeAreaInsets.bottom,
-//                                   width: self.adView.frame.width,
-//                                   height: self.adView.frame.height)
     }
 
     /// Tells the delegate an ad request loaded an ad.

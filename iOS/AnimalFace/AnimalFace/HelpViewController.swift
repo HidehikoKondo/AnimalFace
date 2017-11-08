@@ -77,13 +77,6 @@ class HelpViewController: UIViewController, GADBannerViewDelegate   {
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
         bannerView.delegate = self
-        
-        //ビュー位置調整
-        print("safeview-----------------", self.view.safeAreaInsets)
-//        self.adView.frame = CGRect(x: self.adView.frame.origin.x,
-//                                   y: self.view.frame.height - self.adView.frame.height -  self.view.safeAreaInsets.bottom,
-//                                   width: self.adView.frame.width,
-//                                   height: self.adView.frame.height)
     }
     
     /// Tells the delegate an ad request loaded an ad.
