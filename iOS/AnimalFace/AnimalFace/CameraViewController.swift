@@ -19,8 +19,15 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var thumbnailView: UIImageView!
     @IBOutlet weak var facelineImageView: UIImageView!
     @IBOutlet weak var adView: UIView!
-    var bannerView: GADBannerView!
+    @IBOutlet weak var shutterButton: UIButton!
+    @IBOutlet weak var changeButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var indicatorView: UIView!
 
+
+
+
+    var bannerView: GADBannerView!
     var captureSession: AVCaptureSession!
     var cameraDevices: AVCaptureDevice!
     var imageOutput: AVCaptureStillImageOutput!
@@ -34,6 +41,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         super.viewDidLoad()
         self.viewGradient()
         self.cameraConnection(type: cameraType)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.enableButton()
     }
 
     override func viewWillLayoutSubviews() {
@@ -127,6 +138,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         if(TARGET_OS_SIMULATOR != 0){
             return
         }
+
+        //ボタンを無効
+        self.disableButton()
+
         //ビデオ出力に接続
         let captureVideoConnection = imageOutput.connection(with: AVMediaType.video)
         
@@ -194,7 +209,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
 
         guard observations.first != nil else {
-            print("顔が見つかりませんでした")
+            self.alert(title:"ｱﾚﾚ?>(○´∀｀○) ", message: "顔が写ってないよ")
             return
         }
 
@@ -298,6 +313,33 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
 
     // MARK: - UI関連
+    //アラート
+    func alert(title: String, message:String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        // OKボタンを追加
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler:{(action:UIAlertAction!) -> Void in
+            self.enableButton()
+        }))
+
+        // UIAlertController を表示
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func enableButton(){
+        self.shutterButton.isEnabled = true
+        self.changeButton.isEnabled = true
+        self.backButton.isEnabled = true
+        self.indicatorView.isHidden = true
+    }
+
+    func disableButton(){
+        self.shutterButton.isEnabled = false
+        self.changeButton.isEnabled = false
+        self.backButton.isEnabled = false
+        self.indicatorView.isHidden = false
+    }
+
     @IBAction func back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
