@@ -138,7 +138,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         if(TARGET_OS_SIMULATOR != 0){
             return
         }
-
         //ボタンを無効
         self.disableButton()
 
@@ -159,6 +158,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             print("width: \(Image.size.width)")
             print("height: \(Image.size.height)")
             self.thumbnailView.image = Image.cropping(to: CGRect(x:0, y:((Image.size.height * 0.5)-(Image.size.width * 0.5)), width:Image.size.width, height:Image.size.width))
+
+            //カメラを止める
+            self.captureSession.stopRunning()
+
 
             //顔認識へ
             self.faceDetect()
@@ -228,9 +231,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                 //顔の部分を四角で囲む
                 self.thumbnailView.addSubview(view)
 
-                //TODO: 顔を検出したら、分類処理へ。（１回だけでいいので複数検出したらreturn）
-                print("顔を検出しました")
                 //分類処理へ
+                print("顔を検出しました")
                 self.faceClassification()
 
                 break;
@@ -320,6 +322,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         // OKボタンを追加
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler:{(action:UIAlertAction!) -> Void in
             self.enableButton()
+            self.captureSession.startRunning()
         }))
 
         // UIAlertController を表示
