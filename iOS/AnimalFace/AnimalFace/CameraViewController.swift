@@ -227,9 +227,15 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                 let view = self.CreateBoxView(withColor: UIColor.red)
                 view.frame = self.transformRect(fromRect: face.boundingBox,
                                                 toViewRect: self.thumbnailView)
-                //self.thumbnailView.image = self.originalImage.image
+
+                print(view.frame)
+
+                let croppedImage = self.thumbnailView.image?.cropping(to: view.frame)
+
+
                 //顔の部分を四角で囲む
                 self.thumbnailView.addSubview(view)
+                self.thumbnailView.image = croppedImage
 
                 //分類処理へ
                 print("顔を検出しました")
@@ -249,15 +255,15 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         return view
     }
 
-    //Convert Vision Frame to UIKit Frame
-    func transformRect(fromRect: CGRect , toViewRect :UIView) -> CGRect {
+    //FaceDetectionで返ってきた顔の位置でUIImageで切り抜く
+    func transformRect(fromRect: CGRect , toViewRect :UIImageView) -> CGRect {
 
         var toRect = CGRect()
-        toRect.size.width = fromRect.size.width * toViewRect.frame.size.width
-        toRect.size.height = fromRect.size.height * toViewRect.frame.size.height
-        toRect.origin.y =  (toViewRect.frame.height) - (toViewRect.frame.height * fromRect.origin.y )
+        toRect.size.width = fromRect.size.width * (toViewRect.image?.size.width)!
+        toRect.size.height = fromRect.size.height * (toViewRect.image?.size.height)!
+        toRect.origin.y =  (toViewRect.image?.size.height)! - ((toViewRect.image?.size.height)! * fromRect.origin.y )
         toRect.origin.y  = toRect.origin.y -  toRect.size.height
-        toRect.origin.x =  fromRect.origin.x * toViewRect.frame.size.width
+        toRect.origin.x =  fromRect.origin.x * (toViewRect.image?.size.width)!
 
         return toRect
     }
