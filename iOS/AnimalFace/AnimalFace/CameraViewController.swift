@@ -144,7 +144,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         facelineImageView.bringSubview(toFront: cameraView)
     }
 
-
     @IBAction func takePhoto(_ sender: Any) {
         //シミュレータだったら何もしない
         if(TARGET_OS_SIMULATOR != 0){
@@ -171,9 +170,13 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             print("height: \(Image.size.height)")
             self.thumbnailView.image = Image.cropping(to: CGRect(x:0, y:((Image.size.height * 0.5)-(Image.size.width * 0.5)), width:Image.size.width, height:Image.size.width))
 
+            //インカメのときだけ写真を反転させる
+            if(self.cameraType){
+                self.thumbnailView.image = self.thumbnailView.image?.flipHorizontal()
+            }
+
             //カメラを止める
             self.captureSession.stopRunning()
-
 
             //顔認識へ
             self.faceDetect()
@@ -430,6 +433,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         print("adViewWillLeaveApplication")
     }
 }
+
+//画像切り抜き
 extension UIImage {
     func cropping(to: CGRect) -> UIImage? {
         var opaque = false
@@ -449,4 +454,17 @@ extension UIImage {
         return result
     }
 }
-
+//画像反転
+extension UIImage {
+    func flipHorizontal() -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        let imageRef = self.cgImage
+        let context = UIGraphicsGetCurrentContext()
+        context?.translateBy(x: size.width, y: size.height)
+        context?.scaleBy(x: -1.0, y: 1.0)
+        draw(in: CGRect(x: 0, y: -size.height, width: size.width, height: size.height))
+        let flipHorizontalImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return flipHorizontalImage!
+    }
+}
