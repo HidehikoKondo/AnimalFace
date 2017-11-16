@@ -24,9 +24,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var indicatorView: UIView!
 
-
-
-
     var bannerView: GADBannerView!
     var captureSession: AVCaptureSession!
     var cameraDevices: AVCaptureDevice!
@@ -40,22 +37,24 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewGradient()
-        self.cameraConnection(type: cameraType)
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        self.cameraConnection(type: cameraType)
         self.enableButton()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        self.cameraRelease()
     }
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
         self.admob()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,6 +72,19 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
 
         //再接続
         self.cameraConnection(type: cameraType)
+    }
+
+    // camera stop メモリ解放
+    func cameraRelease(){
+        captureSession.stopRunning()
+        for output in captureSession.outputs {
+            captureSession.removeOutput((output as? AVCaptureOutput)!)
+        }
+        for input in captureSession.inputs {
+            captureSession.removeInput((input as? AVCaptureInput)!)
+        }
+        captureSession = nil
+        cameraDevices = nil
     }
 
     func cameraConnection(type: Bool){
