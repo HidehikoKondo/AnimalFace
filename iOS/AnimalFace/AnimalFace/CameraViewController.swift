@@ -16,7 +16,6 @@ import GoogleMobileAds
 class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate , GADBannerViewDelegate  {
     //MARK: - value outlets
     @IBOutlet weak var cameraView: UIView!
-    @IBOutlet weak var thumbnailView: UIImageView!
     @IBOutlet weak var facelineImageView: UIImageView!
     @IBOutlet weak var adView: UIView!
     @IBOutlet weak var shutterButton: UIButton!
@@ -31,7 +30,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     var imageToAnalyis : CIImage?
     var inputImage: CIImage!
     var cameraType: Bool = true
-
+    var photoImage: UIImage!
+    var croppedFace: UIImage!
 
     //MARK: - Life cycle
     override func viewDidLoad() {
@@ -160,33 +160,45 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             //取得したImageのDataBufferをJPEGを変換
             let capturedImageData: NSData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataBuffer!)! as NSData
             //JPEGからUIImageを作成
-            let Image: UIImage = UIImage(data: capturedImageData as Data)!
-            //アルバムに追加
-            //UIImageWriteToSavedPhotosAlbum(Image, self, nil, nil)
-
-            //self.thumbnailView.image = Image.cropping(to: CGRect(x:0, y:200, width:720, height:720))
-
-            print("width: \(Image.size.width)")
-            print("height: \(Image.size.height)")
-            self.thumbnailView.image = Image.cropping(to: CGRect(x:0, y:((Image.size.height * 0.5)-(Image.size.width * 0.5)), width:Image.size.width, height:Image.size.width))
-
-            //インカメのときだけ写真を反転させる
-            if(self.cameraType){
-                self.thumbnailView.image = self.thumbnailView.image?.flipHorizontal()
-            }
+            let cameraImage: UIImage = UIImage(data: capturedImageData as Data)!
 
             //カメラを止める
             self.captureSession.stopRunning()
+
+            //インカメのときだけ写真を反転させる
+            if(self.cameraType){
+                self.photoImage = cameraImage.flipHorizontal()
+            }else{
+                self.photoImage = cameraImage
+            }
 
             //顔認識へ
             self.faceDetect()
         }
     }
 
+    //写真を正方形に（横幅のサイズで固定）に切り抜く
+    func cropRectangle(image: UIImage) -> UIImage{
+        var croppedImage: UIImage
+
+
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: image.size.width, height: image.size.width), false, 0.0)
+        let imageRef = image
+        let context = UIGraphicsGetCurrentContext()
+
+        var ypos = (image.size.width - image.size.height) * 0.5
+
+        imageRef.draw(in: CGRect(x: 0, y: ypos, width: image.size.width, height: image.size.height))
+
+        croppedImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return croppedImage
+    }
+
     // MARK: - 顔検出
     func faceDetect(){
         print("顔検出開始")
-        guard var uiImage = thumbnailView.image
+        guard var uiImage = photoImage
             else { fatalError("no image from image picker") }
 
         //カメラで撮った画像がなぜか横向きになるので縦にする
@@ -233,29 +245,24 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
 
         // Show the pre-processed image
         DispatchQueue.main.async {
-            self.thumbnailView.subviews.forEach({ (s) in
-                s.removeFromSuperview()
-            })
+//            self.thumbnailView.subviews.forEach({ (s) in
+//                s.removeFromSuperview()
+//            })
             for face in observations
             {
                 //四角で囲む
                 let view = self.CreateBoxView(withColor: UIColor.red)
                 view.frame = self.transformRect(fromRect: face.boundingBox,
-                                                toViewRect: self.thumbnailView)
-
-                print(view.frame)
-
-                let croppedImage = self.thumbnailView.image?.cropping(to: view.frame)
-
+                                                toViewRect: self.photoImage)
+                self.croppedFace = self.photoImage.cropping(to: view.frame)
 
                 //顔の部分を四角で囲む
-                self.thumbnailView.addSubview(view)
-                self.thumbnailView.image = croppedImage
+//                self.thumbnailView.addSubview(view)
+//                self.thumbnailView.image = croppedImage
 
                 //分類処理へ
                 print("顔を検出しました")
                 self.faceClassification()
-
                 break;
             }
         }
@@ -271,14 +278,14 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
 
     //FaceDetectionで返ってきた顔の位置でUIImageで切り抜く
-    func transformRect(fromRect: CGRect , toViewRect :UIImageView) -> CGRect {
+    func transformRect(fromRect: CGRect , toViewRect :UIImage) -> CGRect {
 
         var toRect = CGRect()
-        toRect.size.width = fromRect.size.width * (toViewRect.image?.size.width)!
-        toRect.size.height = fromRect.size.height * (toViewRect.image?.size.height)!
-        toRect.origin.y =  (toViewRect.image?.size.height)! - ((toViewRect.image?.size.height)! * fromRect.origin.y )
+        toRect.size.width = fromRect.size.width * (toViewRect.size.width)
+        toRect.size.height = fromRect.size.height * (toViewRect.size.height)
+        toRect.origin.y =  (toViewRect.size.height) - ((toViewRect.size.height) * fromRect.origin.y )
         toRect.origin.y  = toRect.origin.y -  toRect.size.height
-        toRect.origin.x =  fromRect.origin.x * (toViewRect.image?.size.width)!
+        toRect.origin.x =  fromRect.origin.x * (toViewRect.size.width)
 
         return toRect
     }
@@ -286,7 +293,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     // MARK: -顔分類
     func faceClassification(){
         //画像をモデルに渡す形式（CIImage）に変換
-        guard let uiImage = thumbnailView.image
+        guard let uiImage = self.croppedFace
             else { fatalError("no image from image picker") }
         guard let ciImage = CIImage(image: uiImage)
             else { fatalError("can't create CIImage from UIImage") }
@@ -329,7 +336,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             let storyboard: UIStoryboard = self.storyboard!
             let nextView = storyboard.instantiateViewController(withIdentifier: "resultviewcontroller") as! ResultViewController
             nextView.result = classification
-            nextView.faceImage = self.thumbnailView.image
+            nextView.faceImage = self.cropRectangle(image: self.photoImage)
             self.present(nextView, animated: true, completion: nil)
 
         }
