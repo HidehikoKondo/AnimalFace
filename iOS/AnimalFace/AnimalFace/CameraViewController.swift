@@ -394,6 +394,9 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         //グラデーションレイヤーをビューの一番下に配置
         self.view.layer.insertSublayer(gradientLayer, at: 0)
+
+        //インジケータの角丸
+        self.indicatorView.layer.cornerRadius = 10
     }
 
     //MARK: AdMob
