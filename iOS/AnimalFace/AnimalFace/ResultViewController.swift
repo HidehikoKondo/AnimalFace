@@ -37,9 +37,6 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
             faceImage = resultImage.image
         }
 
-        //画像合成
-        self.createResultImage()
-
         //アプリの存在確認
         self.installCheck()
     }
@@ -54,6 +51,10 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         //AdMob
         interstitial = createAndLoadInterstitial()
         self.admobBanner()
+
+        //画像合成
+        self.createResultImage()
+
     }
 
     override func didReceiveMemoryWarning() {

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina5_5" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,22 +14,19 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.10000000000000001" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="iOSLaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="v50-Tx-0iv">
-                                <rect key="frame" x="0.0" y="311.66666666666669" width="414" height="112.66666666666669"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="v50-Tx-0iv" secondAttribute="height" multiplier="15:4" id="I7c-oc-gAs"/>
-                                    <constraint firstAttribute="width" secondItem="v50-Tx-0iv" secondAttribute="height" multiplier="125:34" id="aKF-ah-A2n"/>
-                                </constraints>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="iOSLaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="v50-Tx-0iv">
+                                <rect key="frame" x="0.0" y="241" width="375" height="185"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="v50-Tx-0iv" firstAttribute="leading" secondItem="VyM-hb-DbV" secondAttribute="leading" id="T0b-vd-oBA"/>
-                            <constraint firstItem="v50-Tx-0iv" firstAttribute="trailing" secondItem="VyM-hb-DbV" secondAttribute="trailing" id="UC1-FS-saQ"/>
-                            <constraint firstItem="v50-Tx-0iv" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="xCB-tQ-6Ya"/>
+                            <constraint firstAttribute="trailing" secondItem="v50-Tx-0iv" secondAttribute="trailing" id="1Yk-d1-Xvc"/>
+                            <constraint firstItem="v50-Tx-0iv" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="fpd-0G-UhB"/>
+                            <constraint firstItem="v50-Tx-0iv" firstAttribute="top" secondItem="VyM-hb-DbV" secondAttribute="top" constant="221" id="jFQ-5r-odd"/>
+                            <constraint firstItem="v50-Tx-0iv" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="jso-je-GQc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VyM-hb-DbV"/>
                     </view>
@@ -41,6 +37,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="iOSLaunchImage" width="500" height="133"/>
+        <image name="iOSLaunchImage" width="750" height="200"/>
     </resources>
 </document>
