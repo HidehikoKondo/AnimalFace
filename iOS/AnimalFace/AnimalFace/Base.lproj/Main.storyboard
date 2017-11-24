@@ -217,7 +217,6 @@
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w2K-2j-ldm">
                                 <rect key="frame" x="0.0" y="518" width="320" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Dtn-dv-mbM"/>
                                     <constraint firstAttribute="width" constant="320" id="rc9-ra-x29"/>
@@ -281,7 +280,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="result-inu" translatesAutoresizingMaskIntoConstraints="NO" id="fxg-mD-1hv">
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="result-inu" translatesAutoresizingMaskIntoConstraints="NO" id="fxg-mD-1hv">
                                 <rect key="frame" x="32" y="25" width="256" height="256"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="fxg-mD-1hv" secondAttribute="height" multiplier="1:1" id="agu-Qx-T41"/>
@@ -289,9 +288,9 @@
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pfs-pc-r8c">
                                 <rect key="frame" x="0.0" y="518" width="320" height="50"/>
-                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="Pfs-pc-r8c" secondAttribute="height" multiplier="32:5" id="HXS-FD-jJ3"/>
+                                    <constraint firstAttribute="width" constant="320" id="AMw-DB-bfD"/>
+                                    <constraint firstAttribute="height" constant="50" id="sIb-nR-5li"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7zx-bZ-dsR">
@@ -388,20 +387,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Pfs-pc-r8c" firstAttribute="top" secondItem="7zx-bZ-dsR" secondAttribute="bottom" constant="8" id="4U4-2L-zMP"/>
                             <constraint firstItem="7zx-bZ-dsR" firstAttribute="top" secondItem="97g-FJ-ett" secondAttribute="bottom" constant="8" id="5dw-Rg-NBd"/>
-                            <constraint firstItem="Pfs-pc-r8c" firstAttribute="trailing" secondItem="X8M-AI-7JK" secondAttribute="trailing" id="DFw-br-hN7"/>
                             <constraint firstItem="X8M-AI-7JK" firstAttribute="trailing" secondItem="fxg-mD-1hv" secondAttribute="trailing" constant="32" id="Dtp-QP-lSB"/>
+                            <constraint firstItem="Pfs-pc-r8c" firstAttribute="bottom" secondItem="X8M-AI-7JK" secondAttribute="bottom" id="FpK-8j-fbl"/>
                             <constraint firstItem="7zx-bZ-dsR" firstAttribute="centerX" secondItem="N1V-ld-v0y" secondAttribute="centerX" id="Hyh-dD-rYi"/>
+                            <constraint firstItem="Pfs-pc-r8c" firstAttribute="top" secondItem="7zx-bZ-dsR" secondAttribute="bottom" constant="8" symbolic="YES" id="OYh-eY-5FI"/>
                             <constraint firstItem="fxg-mD-1hv" firstAttribute="centerX" secondItem="N1V-ld-v0y" secondAttribute="centerX" id="OZG-9N-riB"/>
                             <constraint firstItem="fxg-mD-1hv" firstAttribute="leading" secondItem="X8M-AI-7JK" secondAttribute="leading" constant="32" id="P9Y-bH-vgm"/>
-                            <constraint firstItem="Pfs-pc-r8c" firstAttribute="bottom" secondItem="X8M-AI-7JK" secondAttribute="bottom" id="QDn-35-5WX"/>
-                            <constraint firstItem="Pfs-pc-r8c" firstAttribute="centerX" secondItem="N1V-ld-v0y" secondAttribute="centerX" id="c53-wK-1Ao"/>
+                            <constraint firstItem="Pfs-pc-r8c" firstAttribute="centerX" secondItem="N1V-ld-v0y" secondAttribute="centerX" id="V7J-pB-yvr"/>
                             <constraint firstItem="97g-FJ-ett" firstAttribute="centerX" secondItem="N1V-ld-v0y" secondAttribute="centerX" id="cwc-Z2-qNo"/>
                             <constraint firstItem="fxg-mD-1hv" firstAttribute="top" secondItem="X8M-AI-7JK" secondAttribute="top" constant="5" id="jWd-Pc-O1T"/>
-                            <constraint firstItem="Pfs-pc-r8c" firstAttribute="top" secondItem="7zx-bZ-dsR" secondAttribute="bottom" constant="8" symbolic="YES" id="pDO-0r-lqJ"/>
-                            <constraint firstItem="Pfs-pc-r8c" firstAttribute="leading" secondItem="X8M-AI-7JK" secondAttribute="leading" id="sah-Ag-FWb"/>
-                            <constraint firstItem="Pfs-pc-r8c" firstAttribute="top" secondItem="7zx-bZ-dsR" secondAttribute="bottom" constant="8" id="ydE-qx-XUV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="X8M-AI-7JK"/>
                     </view>

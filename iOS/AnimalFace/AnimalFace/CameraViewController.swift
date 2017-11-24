@@ -76,6 +76,11 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
 
     // camera stop メモリ解放
     func cameraRelease(){
+        //シミュレータだったら何もしない
+        if(TARGET_OS_SIMULATOR != 0){
+            return
+        }
+
         captureSession.stopRunning()
         for output in captureSession.outputs {
             captureSession.removeOutput((output as? AVCaptureOutput)!)
@@ -413,6 +418,17 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     /// Tells the delegate an ad request loaded an ad.
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         print("adViewDidReceiveAd")
+
+        //TODO: なぜか広告が複数表示される問題の対応
+        let bannerViews: Array = self.adView.subviews
+        var index:Int = 0;
+        for view in bannerViews{
+            if(index > 0){
+                view.removeFromSuperview()
+            }
+            index += 1
+        }
+
     }
     
     /// Tells the delegate an ad request failed.

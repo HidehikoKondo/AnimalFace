@@ -55,16 +55,27 @@ class ViewController: UIViewController, GADBannerViewDelegate{
     func admob(){
         //ADビューの配置(320x50)
         bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        self.adView.addSubview(bannerView)
+        bannerView.delegate = self
         bannerView.adUnitID = "ca-app-pub-3324877759270339/5533467015"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
-        bannerView.delegate = self
+        self.adView.addSubview(bannerView)
+
     }
 
     /// Tells the delegate an ad request loaded an ad.
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         print("adViewDidReceiveAd")
+
+        //TODO: なぜか広告が複数表示される問題の対応
+        let bannerViews: Array = self.adView.subviews
+        var index:Int = 0;
+        for view in bannerViews{
+            if(index > 0){
+                view.removeFromSuperview()
+            }
+            index += 1
+        }
     }
 
     /// Tells the delegate an ad request failed.
