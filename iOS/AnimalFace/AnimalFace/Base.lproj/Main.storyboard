@@ -280,7 +280,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="result-inu" translatesAutoresizingMaskIntoConstraints="NO" id="fxg-mD-1hv">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="result-inu" translatesAutoresizingMaskIntoConstraints="NO" id="fxg-mD-1hv">
                                 <rect key="frame" x="32" y="25" width="256" height="256"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="fxg-mD-1hv" secondAttribute="height" multiplier="1:1" id="agu-Qx-T41"/>

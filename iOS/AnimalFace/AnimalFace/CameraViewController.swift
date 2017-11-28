@@ -319,7 +319,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         // Load the ML model through its generated class and create a Vision request for it.
         do {
             var model: VNCoreMLModel? = nil
-            model = try! VNCoreMLModel(for: AnimalFaceModel().model)
+            model = try! VNCoreMLModel(for: Face().model)
             return VNCoreMLRequest(model: model!, completionHandler: self.handleClassification)
         } catch {
             fatalError("can't load Vision ML model: \(error)")

@@ -158,7 +158,8 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
 
         let composer = TWTRComposer()
         composer.setText("just setting up my Twitter Kit")
-        composer.setImage(UIImage(named: "camera"))
+        //composer.setImage(UIImage(named: "camera"))
+        composer.setImage(self.resultImage.image)
         composer.show(from: self, completion: { result in
             print("show")
             self.alert(title: "(´▽｀)ｱﾘｶﾞﾄ!", message: "シェアしてくれてありがとう！")
