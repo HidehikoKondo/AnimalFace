@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "result-ushi.png",
+      "filename" : "result-usi.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "result-ushi-1.png",
+      "filename" : "result-usi-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "result-ushi-2.png",
+      "filename" : "result-usi-2.png",
       "scale" : "3x"
     }
   ],
