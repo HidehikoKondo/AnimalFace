@@ -25,6 +25,9 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
     var result: String = ""
     var faceImage: UIImage! = nil
 
+    var resultText = ""
+    var shareText = "\n#どうぶつ顔占い\nhttps://itunes.apple.com/jp/app/id1314890802"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewGradient()
@@ -64,16 +67,49 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
 
     //MARK: 結果画像関連
     func createResultImage(){
-        let image1:UIImage = UIImage.init(named: "result-" + result)!
-        let image2:UIImage = faceImage
+        let image1:UIImage = faceImage
+        let image2:UIImage = UIImage.init(named: "result-" + result)!
         let image:UIImage = combineImage(imageA: image1, imageB: image2)
         resultImage.image = image;
-        resultImage.layer.cornerRadius = resultImage.frame.size.width * 0.5
-        resultImage.layer.borderColor = UIColor.white.cgColor
-        resultImage.layer.borderWidth = 5
+//        resultImage.layer.cornerRadius = resultImage.frame.size.width * 0.5
+//        resultImage.layer.borderColor = UIColor.white.cgColor
+//        resultImage.layer.borderWidth = 5
         resultImage.clipsToBounds = true
+        
+        self.setResultText()
     }
 
+    func setResultText(){
+        switch result {
+        case "panda":
+            resultText = "笹食ってる場合じゃねぇ！実は肉食系女子！"
+        case "inu":
+            resultText = "一度好きになった相手にはとことん惚れます！"
+        case "koara":
+            resultText = "夜型なので昼間はそっとしといてね。夜は元気だよ。"
+        case "penguin":
+            resultText = "いつでもみんなと仲良しパーリーピーポー"
+        case "kitsune":
+            resultText = "気ままにいつもひとり。群れるのがちょっと苦手"
+        case "kaba":
+            resultText = "いつも優しそうに見えるけど、キレると超怖いよ！"
+        case "kuma":
+            resultText = "普段は怖いイメージだけど実はとっても家族思い"
+        case "uma":
+            resultText = "俺の背後に立つな！おもいっきり蹴っとばすぞ！"
+        case "neko":
+            resultText = "Theツンデレ！！　気まぐれで甘えたり噛み付いたり..."
+        case "usagi":
+            resultText = "かまってくれないと寂しくて死んじゃうぞ"
+        case "risu":
+            resultText = "ちょっと怖がりだけど、人なつっこいカワイイ子"
+        case "ushi":
+            resultText = "いつでもまったりマイペース。のんびり屋さん。"
+        default:
+            resultText = ""
+        }
+    }
+    
     //合体画像
     func combineImage(imageA:UIImage, imageB:UIImage )-> UIImage{
         var combinedImage: UIImage! =  nil
@@ -83,7 +119,7 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         //コンテキスト作成開始
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         imageA.draw(in: rect)
-        imageB.draw(in: CGRect(x:135 , y:77 , width:100 , height:100))
+        imageB.draw(in: CGRect(x:0 , y:0 , width:imageA.size.width , height:imageA.size.height))
 
         //合成
         combinedImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -157,7 +193,7 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
 //        })
 
         let composer = TWTRComposer()
-        composer.setText("just setting up my Twitter Kit")
+        composer.setText(self.resultText + self.shareText)
         //composer.setImage(UIImage(named: "camera"))
         composer.setImage(self.resultImage.image)
         composer.show(from: self, completion: { result in
@@ -190,11 +226,10 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
     //MARK: UI
     //その他のシェアボタン
     @IBAction func pushActivityButton(sender: AnyObject) {
-        let text = "http://www.udonko.net/ \n#どうぶつ顔診断"
         let shareImage:UIImage = resultImage.image! as UIImage
 
         //ActivityViewController設定
-        let activityVc = UIActivityViewController(activityItems: [text, shareImage], applicationActivities: nil)
+        let activityVc = UIActivityViewController(activityItems: [self.resultText + self.shareText, shareImage], applicationActivities: nil)
         let excludedActivityTypes = [
             UIActivityType.postToWeibo,
             //UIActivityType.message,
