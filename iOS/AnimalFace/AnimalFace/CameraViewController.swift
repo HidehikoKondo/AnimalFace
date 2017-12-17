@@ -12,8 +12,11 @@ import Vision
 import ImageIO
 import AVFoundation
 import GoogleMobileAds
+import Firebase
 
 class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate , GADBannerViewDelegate  {
+
+    
     //MARK: - value outlets
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var facelineImageView: UIImageView!
@@ -337,6 +340,14 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             var classification: String = (best.identifier);
             print("Classification: \"\(classification)\" Confidence: \(best.confidence)")
 
+            //イベントログ
+            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                AnalyticsParameterItemID: "classification" as NSObject,
+                AnalyticsParameterItemName: classification as NSObject,
+                AnalyticsParameterContentType: "cont" as NSObject
+                ])
+            
+            
             // 結果画面へ結果の受け渡しと遷移
             let storyboard: UIStoryboard = self.storyboard!
             let nextView = storyboard.instantiateViewController(withIdentifier: "resultviewcontroller") as! ResultViewController
@@ -403,6 +414,12 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
 
         //インジケータの角丸
         self.indicatorView.layer.cornerRadius = 10
+        
+        
+//        let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
+//        let statusBar = UIView(frame:CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.size.width, height: statusBarHeight))
+//        statusBar.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
+//        view.addSubview(statusBar)
     }
 
     //MARK: AdMob

@@ -314,6 +314,12 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
         
         //グラデーションレイヤーをビューの一番下に配置
         self.view.layer.insertSublayer(gradientLayer, at: 0)
+        
+//        
+//        let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
+//        let statusBar = UIView(frame:CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.size.width, height: statusBarHeight))
+//        statusBar.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
+//        view.addSubview(statusBar)
     }
 
     
