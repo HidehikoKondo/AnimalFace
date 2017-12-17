@@ -342,6 +342,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             let nextView = storyboard.instantiateViewController(withIdentifier: "resultviewcontroller") as! ResultViewController
             nextView.result = classification
             nextView.faceImage = self.cropRectangle(image: self.photoImage)
+            nextView.modalTransitionStyle = .partialCurl
             self.present(nextView, animated: true, completion: nil)
 
         }

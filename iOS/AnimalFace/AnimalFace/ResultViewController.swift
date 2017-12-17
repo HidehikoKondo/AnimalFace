@@ -82,29 +82,29 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
     func setResultText(){
         switch result {
         case "panda":
-            resultText = "笹食ってる場合じゃねぇ！実は肉食系女子！"
+            resultText = "【パンダ顔】笹食ってる場合じゃねぇ！実は肉食系女子！"
         case "inu":
-            resultText = "一度好きになった相手にはとことん惚れます！"
+            resultText = "【いぬ顔】一度好きになった相手にはとことん惚れます！"
         case "koara":
-            resultText = "夜型なので昼間はそっとしといてね。夜は元気だよ。"
+            resultText = "【コアラ顔】夜型なので昼間はそっとしといてね。夜は元気だよ。"
         case "penguin":
-            resultText = "いつでもみんなと仲良しパーリーピーポー"
+            resultText = "【ペンギン顔】いつでもみんなと仲良しパーリーピーポー"
         case "kitsune":
-            resultText = "気ままにいつもひとり。群れるのがちょっと苦手"
+            resultText = "【キツネ顔】気ままにいつもひとり。群れるのがちょっと苦手"
         case "kaba":
-            resultText = "いつも優しそうに見えるけど、キレると超怖いよ！"
+            resultText = "【カバ顔】いつも優しそうに見えるけど、キレると超怖いよ！"
         case "kuma":
-            resultText = "普段は怖いイメージだけど実はとっても家族思い"
+            resultText = "【くま顔】普段は怖いイメージだけど実はとっても家族思い"
         case "uma":
-            resultText = "俺の背後に立つな！おもいっきり蹴っとばすぞ！"
+            resultText = "【うま顔】俺の背後に立つな！おもいっきり蹴っとばすぞ！"
         case "neko":
-            resultText = "Theツンデレ！！　気まぐれで甘えたり噛み付いたり..."
+            resultText = "【ねこ顔】Theツンデレ！！　気まぐれで甘えたり噛み付いたり..."
         case "usagi":
-            resultText = "かまってくれないと寂しくて死んじゃうぞ"
+            resultText = "【うさぎ顔】かまってくれないと寂しくて死んじゃうぞ"
         case "risu":
-            resultText = "ちょっと怖がりだけど、人なつっこいカワイイ子"
+            resultText = "【リス顔】ちょっと怖がりだけど、人なつっこいカワイイ子"
         case "ushi":
-            resultText = "いつでもまったりマイペース。のんびり屋さん。"
+            resultText = "【うし顔】いつでもまったりマイペース。のんびり屋さん。"
         default:
             resultText = ""
         }
