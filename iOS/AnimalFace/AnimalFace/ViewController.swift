@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMobileAds
+import Firebase
 
 class ViewController: UIViewController, GADBannerViewDelegate{
     @IBOutlet weak var adView: UIView!
@@ -18,6 +19,13 @@ class ViewController: UIViewController, GADBannerViewDelegate{
         // Do any additional setup after loading the view, typically from a nib.
 
         self.viewGradient()
+
+        //イベントログ
+        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+            AnalyticsParameterItemID: "ViewController" as NSObject,
+            AnalyticsParameterItemName: "ViewController" as NSObject,
+            AnalyticsParameterContentType: "cont" as NSObject
+            ])
     }
     
     override func viewDidLayoutSubviews() {

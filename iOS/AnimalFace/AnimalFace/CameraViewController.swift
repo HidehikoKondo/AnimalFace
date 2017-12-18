@@ -340,14 +340,12 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             var classification: String = (best.identifier);
             print("Classification: \"\(classification)\" Confidence: \(best.confidence)")
 
-            //イベントログ
-            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                AnalyticsParameterItemID: "classification" as NSObject,
-                AnalyticsParameterItemName: classification as NSObject,
-                AnalyticsParameterContentType: "cont" as NSObject
+            //カスタムイベントログ
+            Analytics.logEvent("classification", parameters: [
+                "class": classification as NSObject,
+                "Confidence": best.confidence as NSObject,
                 ])
-            
-            
+
             // 結果画面へ結果の受け渡しと遷移
             let storyboard: UIStoryboard = self.storyboard!
             let nextView = storyboard.instantiateViewController(withIdentifier: "resultviewcontroller") as! ResultViewController
@@ -446,7 +444,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             }
             index += 1
         }
-
     }
     
     /// Tells the delegate an ad request failed.
