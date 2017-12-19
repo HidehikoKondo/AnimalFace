@@ -50,10 +50,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
 
         //3.5inch用レイアウト調整
         if(UIScreen.main.bounds.height == 480){
-            self.facelineImageLeft.constant = 40
-            self.facelineImageRight.constant = -40
-            self.cameraViewLeft.constant = 40
-            self.cameraViewRight.constant = -40
+            self.facelineImageLeft.constant = 45
+            self.facelineImageRight.constant = -45
+            self.cameraViewLeft.constant = 45
+            self.cameraViewRight.constant = -45
         }
     }
 
