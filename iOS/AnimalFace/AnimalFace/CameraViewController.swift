@@ -26,6 +26,13 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var indicatorView: UIView!
 
+    //Layout
+    @IBOutlet weak var cameraViewLeft: NSLayoutConstraint!
+    @IBOutlet weak var cameraViewRight: NSLayoutConstraint!
+    @IBOutlet weak var facelineImageLeft: NSLayoutConstraint!
+    @IBOutlet weak var facelineImageRight: NSLayoutConstraint!
+
+
     var bannerView: GADBannerView!
     var captureSession: AVCaptureSession!
     var cameraDevices: AVCaptureDevice!
@@ -40,6 +47,14 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewGradient()
+
+        //3.5inch用レイアウト調整
+        if(UIScreen.main.bounds.height == 480){
+            self.facelineImageLeft.constant = 40
+            self.facelineImageRight.constant = -40
+            self.cameraViewLeft.constant = 40
+            self.cameraViewRight.constant = -40
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

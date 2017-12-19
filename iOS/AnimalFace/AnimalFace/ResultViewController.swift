@@ -17,6 +17,11 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
     @IBOutlet weak var buttonTwitter: UIButton!
     @IBOutlet weak var buttonLine: UIButton!
 
+    @IBOutlet weak var resultImageRight: NSLayoutConstraint!
+    @IBOutlet weak var resultImageLeft: NSLayoutConstraint!
+
+
+
     var controller: UIDocumentInteractionController!
     var bannerView: GADBannerView!
     var interstitial: GADInterstitial!
@@ -42,6 +47,12 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
 
         //アプリの存在確認
         self.installCheck()
+
+        //3.5inch用レイアウト調整
+        if(UIScreen.main.bounds.height == 480){
+            self.resultImageLeft.constant = 40
+            self.resultImageRight.constant = -40
+        }
     }
 
     override func viewWillLayoutSubviews() {
