@@ -1,0 +1,6 @@
+framework module NendAdapter {
+  umbrella header "NendAdapter.h"
+
+  export *
+  module * { export * }
+}

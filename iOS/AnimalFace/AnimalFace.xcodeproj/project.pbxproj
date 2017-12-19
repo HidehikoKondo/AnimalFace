@@ -16,6 +16,16 @@
 		9A5B19861F69222F008BDB1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A5B19841F69222F008BDB1D /* Main.storyboard */; };
 		9A5B19881F69222F008BDB1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A5B19871F69222F008BDB1D /* Assets.xcassets */; };
 		9A5B198B1F69222F008BDB1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A5B19891F69222F008BDB1D /* LaunchScreen.storyboard */; };
+		9AD45A9C1FE9190700F3D7DA /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD45A9B1FE9190700F3D7DA /* AdSupport.framework */; };
+		9AD45A9E1FE9190E00F3D7DA /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD45A9D1FE9190E00F3D7DA /* ImageIO.framework */; };
+		9AD45AA01FE9191400F3D7DA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD45A9F1FE9191400F3D7DA /* Security.framework */; };
+		9AD45AA21FE9191A00F3D7DA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD45AA11FE9191A00F3D7DA /* AVFoundation.framework */; };
+		9AD45AA41FE9192100F3D7DA /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD45AA31FE9192100F3D7DA /* CoreMedia.framework */; };
+		9AD45AA61FE9192B00F3D7DA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD45AA51FE9192B00F3D7DA /* SystemConfiguration.framework */; };
+		9AD45AA81FE9193200F3D7DA /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD45AA71FE9193200F3D7DA /* WebKit.framework */; };
+		9AD45AAA1FE9193E00F3D7DA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD45AA91FE9193E00F3D7DA /* CoreLocation.framework */; };
+		9AD45AAC1FE9194500F3D7DA /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD45AAB1FE9194500F3D7DA /* CoreMotion.framework */; };
+		9AD45AAE1FE9194D00F3D7DA /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD45AAD1FE9194D00F3D7DA /* CoreTelephony.framework */; };
 		9AFE1F961F72550A00FAF114 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFE1F951F72550A00FAF114 /* CameraViewController.swift */; };
 		9AFE1F981F72593200FAF114 /* AnimalFaceModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 9AFE1F971F72592C00FAF114 /* AnimalFaceModel.mlmodel */; };
 		9AFE1F9A1F72666800FAF114 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFE1F991F72666800FAF114 /* HelpViewController.swift */; };
@@ -35,6 +45,16 @@
 		9A5B19871F69222F008BDB1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A5B198A1F69222F008BDB1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9A5B198C1F69222F008BDB1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9AD45A9B1FE9190700F3D7DA /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		9AD45A9D1FE9190E00F3D7DA /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		9AD45A9F1FE9191400F3D7DA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		9AD45AA11FE9191A00F3D7DA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9AD45AA31FE9192100F3D7DA /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		9AD45AA51FE9192B00F3D7DA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		9AD45AA71FE9193200F3D7DA /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		9AD45AA91FE9193E00F3D7DA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		9AD45AAB1FE9194500F3D7DA /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		9AD45AAD1FE9194D00F3D7DA /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		9AFE1F951F72550A00FAF114 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		9AFE1F971F72592C00FAF114 /* AnimalFaceModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = AnimalFaceModel.mlmodel; path = ../../../ml/modelconverter/AnimalFaceModel.mlmodel; sourceTree = "<group>"; };
 		9AFE1F991F72666800FAF114 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
@@ -45,6 +65,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AD45AAE1FE9194D00F3D7DA /* CoreTelephony.framework in Frameworks */,
+				9AD45AAC1FE9194500F3D7DA /* CoreMotion.framework in Frameworks */,
+				9AD45AAA1FE9193E00F3D7DA /* CoreLocation.framework in Frameworks */,
+				9AD45AA81FE9193200F3D7DA /* WebKit.framework in Frameworks */,
+				9AD45AA61FE9192B00F3D7DA /* SystemConfiguration.framework in Frameworks */,
+				9AD45AA41FE9192100F3D7DA /* CoreMedia.framework in Frameworks */,
+				9AD45AA21FE9191A00F3D7DA /* AVFoundation.framework in Frameworks */,
+				9AD45AA01FE9191400F3D7DA /* Security.framework in Frameworks */,
+				9AD45A9E1FE9190E00F3D7DA /* ImageIO.framework in Frameworks */,
+				9AD45A9C1FE9190700F3D7DA /* AdSupport.framework in Frameworks */,
 				3588D155D17D580BACD99295 /* Pods_AnimalFace.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -101,6 +131,16 @@
 		B4DEA916CF50CA522C22B7DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9AD45AAD1FE9194D00F3D7DA /* CoreTelephony.framework */,
+				9AD45AAB1FE9194500F3D7DA /* CoreMotion.framework */,
+				9AD45AA91FE9193E00F3D7DA /* CoreLocation.framework */,
+				9AD45AA71FE9193200F3D7DA /* WebKit.framework */,
+				9AD45AA51FE9192B00F3D7DA /* SystemConfiguration.framework */,
+				9AD45AA31FE9192100F3D7DA /* CoreMedia.framework */,
+				9AD45AA11FE9191A00F3D7DA /* AVFoundation.framework */,
+				9AD45A9F1FE9191400F3D7DA /* Security.framework */,
+				9AD45A9D1FE9190E00F3D7DA /* ImageIO.framework */,
+				9AD45A9B1FE9190700F3D7DA /* AdSupport.framework */,
 				7754ADB7D86D1CB19A6B18CB /* Pods_AnimalFace.framework */,
 			);
 			name = Frameworks;
@@ -185,6 +225,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-AnimalFace/Pods-AnimalFace-resources.sh",
+				"${PODS_ROOT}/NendSDK_iOS/NendAd.embeddedframework/NendAd.framework/Resources/NendAdResource.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
 			);
@@ -205,11 +246,15 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-AnimalFace/Pods-AnimalFace-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
