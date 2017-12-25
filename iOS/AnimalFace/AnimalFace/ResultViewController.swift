@@ -281,7 +281,7 @@ class ResultViewController: UIViewController, GADBannerViewDelegate ,GADIntersti
 
     //戻る
     @IBAction func back(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 
     //保存ボタン

@@ -58,7 +58,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.cameraConnection(type: cameraType)
         self.enableButton()
     }
 
@@ -73,6 +72,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        self.cameraConnection(type: cameraType)
     }
 
     override func didReceiveMemoryWarning() {
@@ -99,6 +99,11 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             return
         }
 
+        //すでにnilだったら何もしない
+        if (captureSession == nil){
+            return
+        }
+        
         captureSession.stopRunning()
         for output in captureSession.outputs {
             captureSession.removeOutput((output as? AVCaptureOutput)!)
