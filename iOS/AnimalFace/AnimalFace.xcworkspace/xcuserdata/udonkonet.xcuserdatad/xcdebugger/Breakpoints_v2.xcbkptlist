@@ -14,7 +14,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "111"
-            endingLineNumber = "111">
+            endingLineNumber = "111"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -29,8 +31,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "106"
             endingLineNumber = "106"
-            landmarkName = "adViewWillLeaveApplication(_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -40,13 +42,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AnimalFace/CameraViewController.swift"
-            timestampString = "535912263.495197"
+            timestampString = "536518859.090058"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "269"
             endingLineNumber = "269"
-            landmarkName = "handleFaceDetection(request:error:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -56,13 +58,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AnimalFace/CameraViewController.swift"
-            timestampString = "535912263.495774"
+            timestampString = "536518859.095463"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "146"
             endingLineNumber = "146"
-            landmarkName = "cameraConnection(type:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -72,13 +74,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AnimalFace/CameraViewController.swift"
-            timestampString = "535912263.496151"
+            timestampString = "536518859.095921"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "150"
             endingLineNumber = "150"
-            landmarkName = "cameraConnection(type:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -88,13 +90,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AnimalFace/CameraViewController.swift"
-            timestampString = "535912263.49651"
+            timestampString = "536518859.096344"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "154"
             endingLineNumber = "154"
-            landmarkName = "cameraConnection(type:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -104,13 +106,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AnimalFace/CameraViewController.swift"
-            timestampString = "535912263.496846"
+            timestampString = "536518859.096785"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "231"
             endingLineNumber = "231"
-            landmarkName = "faceDetect()"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -120,13 +122,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AnimalFace/CameraViewController.swift"
-            timestampString = "535912263.497198"
+            timestampString = "536518859.097148"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "171"
             endingLineNumber = "171"
-            landmarkName = "cameraConnection(type:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -136,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AnimalFace/ResultViewController.swift"
-            timestampString = "535912263.497537"
+            timestampString = "536114646.271856"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "77"
@@ -152,13 +154,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AnimalFace/CameraViewController.swift"
-            timestampString = "535912263.497598"
+            timestampString = "536518859.097664"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "153"
             endingLineNumber = "153"
-            landmarkName = "cameraConnection(type:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -168,13 +170,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AnimalFace/CameraViewController.swift"
-            timestampString = "535912263.497925"
+            timestampString = "536518859.098074"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "290"
             endingLineNumber = "290"
-            landmarkName = "handleFaceDetection(request:error:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
